@@ -6,6 +6,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Produces;
 import javax.inject.Named;
 
+import projet.commun.dto.CategorieOuvrage;
 import projet.commun.dto.Roles;
 
 
@@ -23,6 +24,17 @@ public class UtilAppli {
 
 	public String getLibelléDeRole( String role )  {
 		return Roles.getLibellé( role );
+	}
+	
+	@Produces
+	@ApplicationScoped
+	@Named("categories")
+	public Collection<String> getCategories(){
+		return CategorieOuvrage.getCategorieOuvrage();
+	}
+	
+	public String getLibelleCategorie(String categorie) {
+		return CategorieOuvrage.getLibellé(categorie);
 	}
 	
 	

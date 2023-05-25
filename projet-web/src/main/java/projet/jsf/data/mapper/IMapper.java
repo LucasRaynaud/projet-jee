@@ -4,7 +4,9 @@ import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
 
 import projet.commun.dto.DtoCompte;
+import projet.commun.dto.DtoOuvrage;
 import projet.jsf.data.Compte;
+import projet.jsf.data.Ouvrage;
 
 
 @Mapper( componentModel = "cdi" )
@@ -20,5 +22,9 @@ public interface IMapper {
 	Compte duplicate( Compte source );
 
 	Compte update( @MappingTarget Compte target, Compte source );
+
+	Ouvrage map(DtoOuvrage dtoOuvrage);
+
+	DtoOuvrage map(Ouvrage courant);
 
 }
