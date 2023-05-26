@@ -28,7 +28,7 @@ public class Ouvrage implements Serializable {
 	private String titre;
 
 	@NotNull(message = "La catégorie est obligatoire")
-	private CategorieOuvrage categorieOuvrage;
+	private String categorieOuvrage;
 
 	private List<DemandeEmprunt> demandeEmprunts = new ArrayList<>();
 
@@ -36,7 +36,7 @@ public class Ouvrage implements Serializable {
 	}
 
 	public Ouvrage(Integer id, String auteur, Date dateparution, Integer idproprietaire, String titre,
-			CategorieOuvrage categorieOuvrage) {
+			String categorieOuvrage) {
 		this.id = id;
 		this.auteur = auteur;
 		this.dateparution = dateparution;
@@ -85,11 +85,11 @@ public class Ouvrage implements Serializable {
 		this.titre = titre;
 	}
 
-	public CategorieOuvrage getCategorieOuvrage() {
+	public String getCategorieOuvrage() {
 		return categorieOuvrage;
 	}
 
-	public void setCategorieOuvrage(CategorieOuvrage categorieOuvrage) {
+	public void setCategorieOuvrage(String categorieOuvrage) {
 		this.categorieOuvrage = categorieOuvrage;
 	}
 
