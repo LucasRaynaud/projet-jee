@@ -1,5 +1,6 @@
 package projet.ejb.data;
 
+<<<<<<< HEAD
 import java.io.Serializable;
 import javax.persistence.*;
 
@@ -17,6 +18,30 @@ public class CategorieOuvrage implements Serializable {
 	@Id
 	private Integer idouvrage;
 
+=======
+import static javax.persistence.GenerationType.IDENTITY;
+
+import java.io.Serializable;
+import javax.persistence.*;
+
+
+/**
+ * The persistent class for the categorie_ouvrage database table.
+ * 
+ */
+@Entity
+@Table(name="categorie_ouvrage")
+@NamedQuery(name="CategorieOuvrage.findAll", query="SELECT c FROM CategorieOuvrage c")
+public class CategorieOuvrage implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue( strategy = IDENTITY)
+	@Column( name = "idouvrage")
+	private Integer idouvrage;
+	
+	@Column( name = "categorie")
+>>>>>>> refs/remotes/GitHub/master
 	private String categorie;
 
 	//bi-directional one-to-one association to Ouvrage
