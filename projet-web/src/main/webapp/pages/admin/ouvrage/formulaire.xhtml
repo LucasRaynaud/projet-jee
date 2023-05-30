@@ -18,33 +18,44 @@
 
 			<table class="form">
 				<tr>
+					<td><h:outputLabel for="id">Id :</h:outputLabel></td>
+					<td><h:inputText id="id" size="5" readonly="true"
+							value="#{modelOuvrage.courant.id}" /> <br /> <h:message
+							for="id" errorClass="error" /></td>
+				</tr>
+				<tr>
 					<td><h:outputLabel for="titre">Titre :</h:outputLabel></td>
 					<td><h:inputText id="titre" size="25"
-							value="#{modelOuvrage.courant.titre}" /> <br />
-					<h:message for="titre" errorClass="error" /></td>
+							value="#{modelOuvrage.courant.titre}" /> <br /> <h:message
+							for="titre" errorClass="error" /></td>
 				</tr>
 				<tr>
 					<td><h:outputLabel for="auteur">Auteur :</h:outputLabel></td>
 					<td><h:inputText id="auteur" size="30"
-							value="#{modelOuvrage.courant.auteur}" /> <br />
-					<h:message for="auteur" errorClass="error" /></td>
+							value="#{modelOuvrage.courant.auteur}" /> <br /> <h:message
+							for="auteur" errorClass="error" /></td>
 				</tr>
 				<tr>
 					<td><h:outputLabel for="dateparution">Date de parution :</h:outputLabel>
 					</td>
 					<td><h:inputText id="dateparution" size="4"
-							value="#{modelOuvrage.courant.dateparution}" />  <br />
-					<h:message for="dateparution" errorClass="error" /></td>
+							value="#{modelOuvrage.courant.dateparution}" /> <br /> <h:message
+							for="dateparution" errorClass="error" /></td>
 				</tr>
 				<tr>
 					<td><h:outputLabel for="categorie">Categorie :</h:outputLabel>
 					</td>
-					<td><h:selectOneMenu id="categories"
-							layout="pageDirection"
+					<td><h:selectOneMenu id="categories" layout="pageDirection"
 							value="#{modelOuvrage.courant.categorieOuvrage}">
 							<f:selectItems value="#{utilAppli.categories}" var="categorie"
 								itemLabel="#{utilAppli.getLibelleCategorie(categorie)}" />
 						</h:selectOneMenu> <h:message for="categories" errorClass="error" /></td>
+				</tr>
+				<tr>
+					<td><h:outputLabel for="idproprietaire">Proprietaire :</h:outputLabel>
+					</td>
+					<td><h:inputText id="idproprietaire" value="#{compteActif.id}"
+							readonly="true" /> <br /></td>
 				</tr>
 			</table>
 			<br />

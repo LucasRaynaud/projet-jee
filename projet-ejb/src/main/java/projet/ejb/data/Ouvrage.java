@@ -1,5 +1,7 @@
 package projet.ejb.data;
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Date;
@@ -16,12 +18,12 @@ public class Ouvrage implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue( strategy = IDENTITY)
 	private Integer idouvrage;
 
 	private String auteur;
 
-	@Temporal(TemporalType.DATE)
-	private Date dateparution;
+	private Integer dateparution;
 
 	private Integer idproprietaire;
 
@@ -54,11 +56,11 @@ public class Ouvrage implements Serializable {
 		this.auteur = auteur;
 	}
 
-	public Date getDateparution() {
+	public Integer getDateparution() {
 		return this.dateparution;
 	}
 
-	public void setDateparution(Date dateparution) {
+	public void setDateparution(Integer dateparution) {
 		this.dateparution = dateparution;
 	}
 

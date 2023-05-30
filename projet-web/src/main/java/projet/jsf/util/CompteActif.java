@@ -13,6 +13,13 @@ import projet.jsf.data.Compte;
 @Named
 public class CompteActif extends Compte {
 	
+	@Override
+	public String toString() {
+		return "CompteActif [id=" + getId() + ", getId()=" + getId() + ", getPseudo()=" + getPseudo() + ", getMotDePasse()="
+				+ getMotDePasse() + ", getEmail()=" + getEmail() + ", getRoles()=" + getRoles() + ", hashCode()="
+				+ hashCode() + ", getClass()=" + getClass() + ", toString()=" + super.toString() + "]";
+	}
+
 	public boolean isLoggedIn() {
 		return getPseudo() != null;
 	}	

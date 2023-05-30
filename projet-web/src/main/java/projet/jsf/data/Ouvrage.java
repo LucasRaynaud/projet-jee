@@ -2,7 +2,6 @@ package projet.jsf.data;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.validation.constraints.NotBlank;
@@ -18,7 +17,7 @@ public class Ouvrage implements Serializable {
 	@Size(max = 30, message = "La longueur du nom de l'auteur ne doit pas dépasser 30 caractères.")
 	private String auteur;
 
-	private Date dateparution;
+	private Integer dateparution;
 
 	@NotNull(message = "L'ouvrage doit avoir un propriétaire")
 	private Integer idproprietaire;
@@ -35,7 +34,7 @@ public class Ouvrage implements Serializable {
 	public Ouvrage() {
 	}
 
-	public Ouvrage(Integer id, String auteur, Date dateparution, Integer idproprietaire, String titre,
+	public Ouvrage(Integer id, String auteur, Integer dateparution, Integer idproprietaire, String titre,
 			String categorieOuvrage) {
 		this.id = id;
 		this.auteur = auteur;
@@ -61,11 +60,11 @@ public class Ouvrage implements Serializable {
 		this.auteur = auteur;
 	}
 
-	public Date getDateparution() {
+	public Integer getDateparution() {
 		return dateparution;
 	}
 
-	public void setDateparution(Date dateparution) {
+	public void setDateparution(Integer dateparution) {
 		this.dateparution = dateparution;
 	}
 

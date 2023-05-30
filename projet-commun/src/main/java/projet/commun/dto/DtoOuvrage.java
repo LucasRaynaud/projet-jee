@@ -1,7 +1,6 @@
 package projet.commun.dto;
 
 import java.io.Serializable;
-import java.util.Date;
 
 @SuppressWarnings("serial")
 public class DtoOuvrage implements Serializable {
@@ -9,22 +8,22 @@ public class DtoOuvrage implements Serializable {
 	private int id;
 	private String titre;
 	private String auteur;
-	private Date dateParution;
-	private DtoCompte proprietaire;
-	private DtoCategorie categorie;
+	private Integer dateParution;
+	private Integer idproprietaire;
+	private Integer idcategorie;
 	
 	public DtoOuvrage() {
 		super();
 	}
 	
-	public DtoOuvrage(int id,String titre,String auteur,Date dateParution,DtoCategorie dtoCategorie,DtoCompte proprietaire) {
+	public DtoOuvrage(int id,String titre,String auteur,Integer dateParution,Integer dtoCategorie,Integer proprietaire) {
 		super();
 		this.id = id;
 		this.titre = titre;
 		this.auteur = auteur;
 		this.setDateParution(dateParution);
-		this.categorie = dtoCategorie;
-		this.proprietaire = proprietaire;
+		this.idcategorie = dtoCategorie;
+		this.idproprietaire = proprietaire;
 	}
 	
 	public int getId() {
@@ -45,26 +44,26 @@ public class DtoOuvrage implements Serializable {
 	public void setAuteur(String auteur) {
 		this.auteur = auteur;
 	}
-	public DtoCategorie getCategorie() {
-		return categorie;
+	public Integer getCategorie() {
+		return idcategorie;
 	}
-	public void setCategorie(DtoCategorie categorie) {
-		this.categorie = categorie;
+	public void setCategorie(Integer categorie) {
+		this.idcategorie = categorie;
 	}
 
-	public Date getDateParution() {
+	public Integer getDateParution() {
 		return dateParution;
 	}
 
-	public void setDateParution(Date dateParution) {
+	public void setDateParution(Integer dateParution) {
 		this.dateParution = dateParution;
 	}
 
-	public DtoCompte getProprietaire() {
-		return proprietaire;
+	public Integer getProprietaire() {
+		return idproprietaire;
 	}
 
-	public void setProprietaire(DtoCompte proprietaire) {
-		this.proprietaire = proprietaire;
+	public void setProprietaire(Integer proprietaire) {
+		this.idproprietaire = proprietaire;
 	}
 }

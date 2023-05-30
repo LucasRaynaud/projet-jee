@@ -2,7 +2,6 @@ package model;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.util.Date;
 import java.util.List;
 
 
@@ -19,9 +18,8 @@ public class Ouvrage implements Serializable {
 	private Integer idouvrage;
 
 	private String auteur;
-
-	@Temporal(TemporalType.DATE)
-	private Date dateparution;
+	
+	private Integer dateparution;
 
 	private String titre;
 
@@ -57,11 +55,11 @@ public class Ouvrage implements Serializable {
 		this.auteur = auteur;
 	}
 
-	public Date getDateparution() {
+	public Integer getDateparution() {
 		return this.dateparution;
 	}
 
-	public void setDateparution(Date dateparution) {
+	public void setDateparution(Integer dateparution) {
 		this.dateparution = dateparution;
 	}
 

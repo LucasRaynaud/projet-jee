@@ -55,6 +55,7 @@ public class ModelConnexion {
 
 	        compteActif.setPseudo( dto.getPseudo() );
 	        compteActif.setRoles( dto.getRoles() );
+	        compteActif.setId(dto.getId());
 	        
 	    	modelInfo.setTitre( "Bienvenue" );
 	    	modelInfo.setTexte( "Vous êtes connecté en tant que '" + courant.getPseudo() +"'.");
