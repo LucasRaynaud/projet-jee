@@ -6,13 +6,13 @@ import java.io.Serializable;
 public class DtoCategorie implements Serializable{
 
 	private int id;
-	private String categorie;
+	private CategorieOuvrage categorie;
 	
 	public DtoCategorie() {
 		super();
 	}
 	
-	public DtoCategorie(int id, String categorie) {
+	public DtoCategorie(int id, CategorieOuvrage categorie) {
 		super();
 		this.id = id;
 		this.categorie = categorie;
@@ -24,10 +24,10 @@ public class DtoCategorie implements Serializable{
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getCategorie() {
+	public CategorieOuvrage getCategorie() {
 		return categorie;
 	}
-	public void setCategorie(String categorie) {
+	public void setCategorie(CategorieOuvrage categorie) {
 		this.categorie = categorie;
 	}
 }

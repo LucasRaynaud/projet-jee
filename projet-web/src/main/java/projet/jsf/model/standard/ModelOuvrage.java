@@ -12,8 +12,10 @@ import javax.inject.Named;
 import projet.commun.dto.DtoOuvrage;
 import projet.commun.exception.ExceptionValidation;
 import projet.commun.service.IServiceOuvrage;
+import projet.jsf.data.CategorieOuvrage;
 import projet.jsf.data.Ouvrage;
 import projet.jsf.data.mapper.IMapper;
+import projet.jsf.util.CompteActif;
 import projet.jsf.util.UtilJsf;
 
 @SuppressWarnings("serial")
@@ -24,6 +26,9 @@ public class ModelOuvrage implements Serializable {
 	private List<Ouvrage> liste;
 
 	private Ouvrage courant;
+	
+	@Inject
+	private CompteActif compteActif;
 
 	@EJB
 	private IServiceOuvrage serviceOuvrage;
@@ -64,6 +69,8 @@ public class ModelOuvrage implements Serializable {
 	public String validerMiseAJour() {
 		try {
 			if ( courant.getId() == null) {
+				courant.setIdproprietaire(compteActif);
+				System.out.println(compteActif);
 				serviceOuvrage.inserer( mapper.map(courant) );
 			} else {
 				serviceOuvrage.modifier( mapper.map(courant) );

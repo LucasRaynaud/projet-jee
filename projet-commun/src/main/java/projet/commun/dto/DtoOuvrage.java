@@ -9,21 +9,21 @@ public class DtoOuvrage implements Serializable {
 	private String titre;
 	private String auteur;
 	private Integer dateParution;
-	private Integer idproprietaire;
-	private Integer idcategorie;
+	private DtoCompte proprietaire;
+	private DtoCategorie categorie;
 	
 	public DtoOuvrage() {
 		super();
 	}
 	
-	public DtoOuvrage(int id,String titre,String auteur,Integer dateParution,Integer dtoCategorie,Integer proprietaire) {
+	public DtoOuvrage(int id,String titre,String auteur,Integer dateParution,DtoCategorie categorie,DtoCompte proprietaire) {
 		super();
 		this.id = id;
 		this.titre = titre;
 		this.auteur = auteur;
 		this.setDateParution(dateParution);
-		this.idcategorie = dtoCategorie;
-		this.idproprietaire = proprietaire;
+		this.categorie = categorie;
+		this.proprietaire = proprietaire;
 	}
 	
 	public int getId() {
@@ -44,11 +44,11 @@ public class DtoOuvrage implements Serializable {
 	public void setAuteur(String auteur) {
 		this.auteur = auteur;
 	}
-	public Integer getCategorie() {
-		return idcategorie;
+	public DtoCategorie getCategorie() {
+		return categorie;
 	}
-	public void setCategorie(Integer categorie) {
-		this.idcategorie = categorie;
+	public void setCategorie(DtoCategorie categorie) {
+		this.categorie = categorie;
 	}
 
 	public Integer getDateParution() {
@@ -59,11 +59,11 @@ public class DtoOuvrage implements Serializable {
 		this.dateParution = dateParution;
 	}
 
-	public Integer getProprietaire() {
-		return idproprietaire;
+	public DtoCompte getProprietaire() {
+		return proprietaire;
 	}
 
-	public void setProprietaire(Integer proprietaire) {
-		this.idproprietaire = proprietaire;
+	public void setProprietaire(DtoCompte proprietaire) {
+		this.proprietaire = proprietaire;
 	}
 }

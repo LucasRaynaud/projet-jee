@@ -1,111 +1,44 @@
 package projet.ejb.data;
 
-<<<<<<< HEAD
-import java.io.Serializable;
-import javax.persistence.*;
-import java.util.Date;
-
-
-/**
- * The persistent class for the demande_emprunt database table.
- * 
- */
-@Entity
-@Table(name="demande_emprunt")
-@NamedQuery(name="DemandeEmprunt.findAll", query="SELECT d FROM DemandeEmprunt d")
-public class DemandeEmprunt implements Serializable {
-	private static final long serialVersionUID = 1L;
-
-	@Id
-	private Integer iddemandeemprunt;
-
-	@Temporal(TemporalType.DATE)
-	private Date dateemprunt;
-
-	private Integer idemprunteur;
-
-	private Integer idproprietaire;
-
-	private String statut;
-
-	//bi-directional many-to-one association to Ouvrage
-	@ManyToOne
-	@JoinColumn(name="idouvrage")
-	private Ouvrage ouvrage;
-
-	public DemandeEmprunt() {
-	}
-
-	public Integer getIddemandeemprunt() {
-		return this.iddemandeemprunt;
-	}
-
-	public void setIddemandeemprunt(Integer iddemandeemprunt) {
-		this.iddemandeemprunt = iddemandeemprunt;
-	}
-
-	public Date getDateemprunt() {
-		return this.dateemprunt;
-	}
-
-	public void setDateemprunt(Date dateemprunt) {
-		this.dateemprunt = dateemprunt;
-	}
-
-	public Integer getIdemprunteur() {
-		return this.idemprunteur;
-	}
-
-	public void setIdemprunteur(Integer idemprunteur) {
-		this.idemprunteur = idemprunteur;
-	}
-
-	public Integer getIdproprietaire() {
-		return this.idproprietaire;
-	}
-
-	public void setIdproprietaire(Integer idproprietaire) {
-=======
 import static javax.persistence.GenerationType.IDENTITY;
 
 import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Date;
 
-
 /**
  * The persistent class for the demande_emprunt database table.
  * 
  */
 @Entity
-@Table(name="demande_emprunt")
-@NamedQuery(name="DemandeEmprunt.findAll", query="SELECT d FROM DemandeEmprunt d")
+@Table(name = "demande_emprunt")
+@NamedQuery(name = "DemandeEmprunt.findAll", query = "SELECT d FROM DemandeEmprunt d")
 public class DemandeEmprunt implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue( strategy = IDENTITY)
-	@Column( name = "iddemandeemprunt")
+	@GeneratedValue(strategy = IDENTITY)
+	@Column(name = "iddemandeemprunt")
 	private Integer iddemandeemprunt;
 
 	@Temporal(TemporalType.DATE)
-	@Column( name = "dateemprunt")
+	@Column(name = "dateemprunt")
 	private Date dateemprunt;
-	
-	@JoinColumn( name = "idemprunteur")
+
+	@JoinColumn(name = "idemprunteur")
 	@OneToOne
 	private Compte idemprunteur;
-	
-	@JoinColumn( name = "idproprietaire")
+
+	@JoinColumn(name = "idproprietaire")
 	@OneToOne
 	private Compte idproprietaire;
-	
-	@Column( name = "statut")
+
+	@Column(name = "statut")
 	private String statut;
 
-	//bi-directional many-to-one association to Ouvrage
+	// bi-directional many-to-one association to Ouvrage
 	@ManyToOne
-	@JoinColumn(name="idouvrage")
+	@JoinColumn(name = "idouvrage")
 	private Ouvrage ouvrage;
 
 	public DemandeEmprunt() {
@@ -140,7 +73,6 @@ public class DemandeEmprunt implements Serializable {
 	}
 
 	public void setIdproprietaire(Compte idproprietaire) {
->>>>>>> refs/remotes/GitHub/master
 		this.idproprietaire = idproprietaire;
 	}
 

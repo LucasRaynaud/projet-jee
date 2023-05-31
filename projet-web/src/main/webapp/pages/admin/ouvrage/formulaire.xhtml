@@ -46,7 +46,8 @@
 					<td><h:outputLabel for="categorie">Categorie :</h:outputLabel>
 					</td>
 					<td><h:selectOneMenu id="categories" layout="pageDirection"
-							value="#{modelOuvrage.courant.categorieOuvrage}">
+							value="#{modelOuvrage.courant.categorieOuvrage}"
+							converter="#{converterCategorie}">
 							<f:selectItems value="#{utilAppli.categories}" var="categorie"
 								itemLabel="#{utilAppli.getLibelleCategorie(categorie)}" />
 						</h:selectOneMenu> <h:message for="categories" errorClass="error" /></td>

@@ -20,26 +20,26 @@ public class Ouvrage implements Serializable {
 	private Integer dateparution;
 
 	@NotNull(message = "L'ouvrage doit avoir un propriétaire")
-	private Integer idproprietaire;
+	private Compte proprietaire;
 
 	@NotBlank(message = "Le titre doit être renseigné.")
 	@Size(max = 25, message = "Le titre ne doit pas dépasser 25 caractères.")
 	private String titre;
 
 	@NotNull(message = "La catégorie est obligatoire")
-	private String categorieOuvrage;
+	private CategorieOuvrage categorieOuvrage;
 
 	private List<DemandeEmprunt> demandeEmprunts = new ArrayList<>();
 
 	public Ouvrage() {
 	}
 
-	public Ouvrage(Integer id, String auteur, Integer dateparution, Integer idproprietaire, String titre,
-			String categorieOuvrage) {
+	public Ouvrage(Integer id, String auteur, Integer dateparution, Compte proprietaire, String titre,
+			CategorieOuvrage categorieOuvrage) {
 		this.id = id;
 		this.auteur = auteur;
 		this.dateparution = dateparution;
-		this.idproprietaire = idproprietaire;
+		this.proprietaire = proprietaire;
 		this.titre = titre;
 		this.categorieOuvrage = categorieOuvrage;
 	}
@@ -68,12 +68,12 @@ public class Ouvrage implements Serializable {
 		this.dateparution = dateparution;
 	}
 
-	public Integer getIdproprietaire() {
-		return idproprietaire;
+	public Compte getIdproprietaire() {
+		return proprietaire;
 	}
 
-	public void setIdproprietaire(Integer idproprietaire) {
-		this.idproprietaire = idproprietaire;
+	public void setIdproprietaire(Compte idproprietaire) {
+		this.proprietaire = idproprietaire;
 	}
 
 	public String getTitre() {
@@ -84,11 +84,11 @@ public class Ouvrage implements Serializable {
 		this.titre = titre;
 	}
 
-	public String getCategorieOuvrage() {
+	public CategorieOuvrage getCategorieOuvrage() {
 		return categorieOuvrage;
 	}
 
-	public void setCategorieOuvrage(String categorieOuvrage) {
+	public void setCategorieOuvrage(CategorieOuvrage categorieOuvrage) {
 		this.categorieOuvrage = categorieOuvrage;
 	}
 

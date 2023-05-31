@@ -37,7 +37,7 @@ public final class CategorieOuvrage {
 		return categories;
 	}
 	
-	public static String getLibellé( String categorie ) {
+	public static String getLibelle( String categorie ) {
 		int index = categories.indexOf( categorie );
 		if ( index == -1 ) {
 			throw new IllegalArgumentException();

@@ -34,7 +34,7 @@ public class UtilAppli {
 	}
 	
 	public String getLibelleCategorie(String categorie) {
-		return CategorieOuvrage.getLibellé(categorie);
+		return CategorieOuvrage.getLibelle(categorie);
 	}
 	
 	
