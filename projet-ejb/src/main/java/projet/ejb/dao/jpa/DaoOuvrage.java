@@ -23,9 +23,9 @@ public class DaoOuvrage implements IDaoOuvrage{
 
 	@Override
 	public int inserer(Ouvrage ouvrage) {
-		em.persist(ouvrage);
+		em.merge(ouvrage);
 		em.flush();
-		return ouvrage.getIdouvrage();
+		return ouvrage.getId();
 	}
 
 	@Override

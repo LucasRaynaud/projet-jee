@@ -15,7 +15,7 @@ public class Ouvrage implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	private Integer idouvrage;
+	private Integer id;
 
 	private String auteur;
 	
@@ -23,7 +23,7 @@ public class Ouvrage implements Serializable {
 
 	private String titre;
 
-	private String categorieOuvrage;
+	private String categorie;
 
 	//bi-directional many-to-one association to DemandeEmprunt
 	@OneToMany(mappedBy="ouvrage")
@@ -36,12 +36,12 @@ public class Ouvrage implements Serializable {
 	public Ouvrage() {
 	}
 
-	public Integer getIdouvrage() {
-		return this.idouvrage;
+	public Integer getId() {
+		return this.id;
 	}
 
-	public void setIdouvrage(Integer idouvrage) {
-		this.idouvrage = idouvrage;
+	public void setId(Integer idouvrage) {
+		this.id = idouvrage;
 	}
 
 	public String getAuteur() {
@@ -68,12 +68,12 @@ public class Ouvrage implements Serializable {
 		this.titre = titre;
 	}
 
-	public String getCategorieOuvrage() {
-		return this.categorieOuvrage;
+	public String getCategorie() {
+		return this.categorie;
 	}
 
-	public void setCategorieOuvrage(String categorieOuvrage) {
-		this.categorieOuvrage = categorieOuvrage;
+	public void setCategorie(String categorieOuvrage) {
+		this.categorie = categorieOuvrage;
 	}
 
 	public List<DemandeEmprunt> getDemandeEmprunts() {

@@ -4,8 +4,10 @@ import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
 
 import projet.commun.dto.DtoCompte;
+import projet.commun.dto.DtoDemandeEmprunt;
 import projet.commun.dto.DtoOuvrage;
 import projet.jsf.data.Compte;
+import projet.jsf.data.DemandeEmprunt;
 import projet.jsf.data.Ouvrage;
 
 
@@ -26,5 +28,9 @@ public interface IMapper {
 	Ouvrage map(DtoOuvrage dtoOuvrage);
 
 	DtoOuvrage map(Ouvrage courant);
+
+	DemandeEmprunt map(DtoDemandeEmprunt dtoDemandeEmprunt);
+
+	DtoDemandeEmprunt map(DemandeEmprunt courant);
 
 }

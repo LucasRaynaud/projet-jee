@@ -5,6 +5,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * The persistent class for the ouvrage database table.
@@ -19,7 +20,7 @@ public class Ouvrage implements Serializable {
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "idouvrage")
-	private Integer idouvrage;
+	private Integer id;
 
 	// @NotBlank( message = "Le Nom de l'auteur doit etre renseigné")
 	@Column(name = "auteur")
@@ -46,12 +47,12 @@ public class Ouvrage implements Serializable {
 	public Ouvrage() {
 	}
 
-	public Integer getIdouvrage() {
-		return this.idouvrage;
+	public Integer getId() {
+		return this.id;
 	}
 
-	public void setIdouvrage(Integer idouvrage) {
-		this.idouvrage = idouvrage;
+	public void setId(Integer idouvrage) {
+		this.id = idouvrage;
 	}
 
 	public String getAuteur() {
@@ -115,6 +116,32 @@ public class Ouvrage implements Serializable {
 	public void setCategorie(String categorieOuvrage) {
 		this.categorie = categorieOuvrage;
 	}
+
+	@Override
+	public String toString() {
+		return "Ouvrage [id=" + id + ", auteur=" + auteur + ", dateParution=" + dateParution + ", proprietaire="
+				+ proprietaire + ", titre=" + titre + ", categorie=" + categorie + ", demandeEmprunts="
+				+ demandeEmprunts + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Ouvrage other = (Ouvrage) obj;
+		return Objects.equals(id, other.id);
+	}
+	
+	
 	
 
 }

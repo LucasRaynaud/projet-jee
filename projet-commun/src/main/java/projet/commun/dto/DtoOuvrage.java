@@ -66,4 +66,11 @@ public class DtoOuvrage implements Serializable {
 	public void setProprietaire(DtoCompte proprietaire) {
 		this.proprietaire = proprietaire;
 	}
+
+	@Override
+	public String toString() {
+		return "DtoOuvrage [id=" + id + ", titre=" + titre + ", auteur=" + auteur + ", dateParution=" + dateParution
+				+ ", proprietaire=" + proprietaire + ", categorie=" + categorie + "]";
+	}
+
 }

@@ -19,7 +19,7 @@ public class DemandeEmprunt implements Serializable {
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "iddemandeemprunt")
-	private Integer iddemandeemprunt;
+	private Integer id;
 
 	@Temporal(TemporalType.DATE)
 	@Column(name = "dateemprunt")
@@ -27,11 +27,7 @@ public class DemandeEmprunt implements Serializable {
 
 	@JoinColumn(name = "idemprunteur")
 	@OneToOne
-	private Compte idemprunteur;
-
-	@JoinColumn(name = "idproprietaire")
-	@OneToOne
-	private Compte idproprietaire;
+	private Compte emprunteur;
 
 	@Column(name = "statut")
 	private String statut;
@@ -44,12 +40,12 @@ public class DemandeEmprunt implements Serializable {
 	public DemandeEmprunt() {
 	}
 
-	public Integer getIddemandeemprunt() {
-		return this.iddemandeemprunt;
+	public Integer getId() {
+		return this.id;
 	}
 
-	public void setIddemandeemprunt(Integer iddemandeemprunt) {
-		this.iddemandeemprunt = iddemandeemprunt;
+	public void setId(Integer iddemandeemprunt) {
+		this.id = iddemandeemprunt;
 	}
 
 	public Date getDateemprunt() {
@@ -60,20 +56,12 @@ public class DemandeEmprunt implements Serializable {
 		this.dateemprunt = dateemprunt;
 	}
 
-	public Compte getIdemprunteur() {
-		return this.idemprunteur;
+	public Compte getEmprunteur() {
+		return this.emprunteur;
 	}
 
-	public void setIdemprunteur(Compte idemprunteur) {
-		this.idemprunteur = idemprunteur;
-	}
-
-	public Compte getIdproprietaire() {
-		return this.idproprietaire;
-	}
-
-	public void setIdproprietaire(Compte idproprietaire) {
-		this.idproprietaire = idproprietaire;
+	public void setEmprunteur(Compte idemprunteur) {
+		this.emprunteur = idemprunteur;
 	}
 
 	public String getStatut() {
