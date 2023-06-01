@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<ui:composition template="/template/page-standard.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">>
+
+	 <f:metadata>
+		<f:viewParam name="id" value="#{modelDemandeAmi.courant.id}" />
+		<f:viewAction action="#{modelDemandeAmi.actualiserCourant()}" />
+	</f:metadata>
+
+	<ui:define name="titre">Demande d'amis</ui:define>
+
+	<ui:define name="contenu">
+
+		<h:form>
+
+			<table class="form">
+				<tr>
+					<td><h:outputLabel for="id">Id :</h:outputLabel></td>
+					<td><h:inputText id="id" size="5" readonly="true"
+							value="#{modelDemandeAmi.courant.id}" /> <br /> <h:message
+							for="id" errorClass="error" /></td>
+				</tr>
+				<tr>
+					<td><h:outputLabel for="amis">Amis :</h:outputLabel></td>
+					<td><h:selectOneMenu id="receveur" layout="pageDirection"
+							value="#{modelDemandeAmi.courant.receveur}"
+							converter="#{converterCompte}">
+							<f:selectItems value="#{modelCompte.liste}" var="receveur"
+								itemLabel="#{receveur.pseudo}" itemValue="#{receveur}" />
+						</h:selectOneMenu> <h:message for="receveurs" errorClass="error" /></td>
+				</tr>
+				<h:inputText id="idenvoyeur" value="#{compteActif.id}"
+							readonly="true" />
+			</table>
+			<br />
+			<h:commandButton value="Valider"
+				action="#{modelDemandeAmi.validerMiseAJour()}" />
+			<h:button value="Retour" outcome="amis" />
+		</h:form>
+
+	</ui:define>
+
+</ui:composition>

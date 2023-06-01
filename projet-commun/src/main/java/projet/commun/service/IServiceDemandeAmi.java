@@ -16,4 +16,6 @@ public interface IServiceDemandeAmi {
 	DtoDemandeAmi 		retrouver( int idDemandeAmi ) ;
 
 	List<DtoDemandeAmi>	listerTout() ;
+	
+	List<DtoDemandeAmi> listerDemandeAmiCompte(int idCompte);
 }

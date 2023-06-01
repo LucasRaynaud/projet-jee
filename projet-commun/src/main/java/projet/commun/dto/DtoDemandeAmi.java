@@ -14,9 +14,9 @@ public class DtoDemandeAmi implements Serializable  {
 	
 	private Date 		datedemande;
 	
-	private DtoCompte 	idenvoyeur;
+	private DtoCompte 	envoyeur;
 	
-	private DtoCompte 	idreceveur;
+	private DtoCompte 	receveur;
 	
 	private String 		statut;
 	
@@ -30,8 +30,8 @@ public class DtoDemandeAmi implements Serializable  {
 	public DtoDemandeAmi(int id, Date datedemande, DtoCompte idenvoyeur, DtoCompte idreceveur, String statut ) {
 		this.id = id;
 		this.datedemande = datedemande;
-		this.idenvoyeur = idenvoyeur;
-		this.idreceveur = idreceveur;
+		this.envoyeur = idenvoyeur;
+		this.receveur = idreceveur;
 		this.statut = statut;
 	}
 	
@@ -46,28 +46,28 @@ public class DtoDemandeAmi implements Serializable  {
 		this.id = id;
 	}
 
-	public Date getDatedemande() {
+	public Date getDateDemande() {
 		return datedemande;
 	}
 
-	public void setDatedemande(Date datedemande) {
+	public void setDateDemande(Date datedemande) {
 		this.datedemande = datedemande;
 	}
 
-	public DtoCompte getIdenvoyeur() {
-		return idenvoyeur;
+	public DtoCompte getEnvoyeur() {
+		return envoyeur;
 	}
 
-	public void setIdenvoyeur(DtoCompte idenvoyeur) {
-		this.idenvoyeur = idenvoyeur;
+	public void setEnvoyeur(DtoCompte idenvoyeur) {
+		this.envoyeur = idenvoyeur;
 	}
 
-	public DtoCompte getIdreceveur() {
-		return idreceveur;
+	public DtoCompte getReceveur() {
+		return receveur;
 	}
 
-	public void setIdreceveur(DtoCompte idreceveur) {
-		this.idreceveur = idreceveur;
+	public void setReceveur(DtoCompte idreceveur) {
+		this.receveur = idreceveur;
 	}
 
 	public String getStatut() {

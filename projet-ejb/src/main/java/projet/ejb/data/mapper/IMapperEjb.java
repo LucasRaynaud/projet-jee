@@ -4,8 +4,10 @@ import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
 import projet.commun.dto.DtoCompte;
+import projet.commun.dto.DtoDemandeAmi;
 import projet.commun.dto.DtoOuvrage;
 import projet.ejb.data.Compte;
+import projet.ejb.data.DemandeAmi;
 import projet.ejb.data.Ouvrage;
 
  
@@ -24,5 +26,9 @@ public interface IMapperEjb {
 	Ouvrage map(DtoOuvrage dtoOuvrage);
 
 	DtoOuvrage map(Ouvrage ouvrage);
+
+	DemandeAmi map(DtoDemandeAmi dtoDemandeAmi);
+
+	DtoDemandeAmi map(DemandeAmi retrouver);
 	
 }

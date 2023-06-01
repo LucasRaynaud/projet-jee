@@ -1,19 +1,20 @@
 package projet.ejb.service.standard;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
-import projet.commun.dto.DtoCompte;
 import projet.commun.dto.DtoDemandeAmi;
 import projet.commun.exception.ExceptionValidation;
 import projet.commun.service.IServiceDemandeAmi;
-import projet.ejb.dao.IDaoCompte;
 import projet.ejb.dao.IDaoDemandeAmi;
-import projet.ejb.data.Compte;
+import projet.ejb.data.DemandeAmi;
 import projet.ejb.data.mapper.IMapperEjb;
 
 @Stateless
@@ -32,13 +33,14 @@ public class ServiceDemandeAmi implements IServiceDemandeAmi{
 	
 	@Override
 	public int inserer(DtoDemandeAmi dtoDemandeAmi) throws ExceptionValidation {
-		//int id = dtoDemandeAmi.inserer(mapper.map(dtoDemandeAmi));
-		return 0;
+		dtoDemandeAmi.setStatut("EN ATTENTE");
+		dtoDemandeAmi.setDateDemande(new Date());
+		return daoDemandeAmi.inserer(mapper.map(dtoDemandeAmi));
 	}
 
 	@Override
 	public void modifier(DtoDemandeAmi dtoDemandeAmi) throws ExceptionValidation {
-		//dtoDemandeAmi.modifier(mapper.map(dtoDemandeAmi));
+		daoDemandeAmi.modifier(mapper.map(dtoDemandeAmi));
 		
 	}
 
@@ -49,21 +51,28 @@ public class ServiceDemandeAmi implements IServiceDemandeAmi{
 
 	@Override
 	public DtoDemandeAmi retrouver(int idDemandeAmi) {
-		//return mapper.map(daoDemandeAmi.retrouver(idDemandeAmi));
-		return null;
+		 return mapper.map(daoDemandeAmi.retrouver(idDemandeAmi));
 	}
 
 	@Override
 	public List<DtoDemandeAmi> listerTout() {
-		/*
+		
 		List<DtoDemandeAmi> liste = new ArrayList<>();
-		for (Compte compte : daoDemandeAmi.listerTout()) {
+		for (DemandeAmi compte : daoDemandeAmi.listerTout()) {
 			liste.add(mapper.map(compte));
 		}
-		return liste;*/
-		return null;
+		return liste;
 	}
 	
 	// Méthodes auxiliaires
+	
+	@Override
+	public List<DtoDemandeAmi> listerDemandeAmiCompte(int idCompte) {
+		List<DtoDemandeAmi> liste = new ArrayList<>();
+		for (DemandeAmi compte : daoDemandeAmi.listerDemandeAmiCompte(idCompte)) {
+			liste.add(mapper.map(compte));
+		}
+		return liste;
+	}
 
 }
