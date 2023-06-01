@@ -39,15 +39,14 @@
 					<td><h:outputLabel for="dateparution">Date de parution :</h:outputLabel>
 					</td>
 					<td><h:inputText id="dateparution" size="4"
-							value="#{modelOuvrage.courant.dateparution}" /> <br /> <h:message
+							value="#{modelOuvrage.courant.dateParution}" /> <br /> <h:message
 							for="dateparution" errorClass="error" /></td>
 				</tr>
 				<tr>
 					<td><h:outputLabel for="categorie">Categorie :</h:outputLabel>
 					</td>
 					<td><h:selectOneMenu id="categories" layout="pageDirection"
-							value="#{modelOuvrage.courant.categorieOuvrage}"
-							converter="#{converterCategorie}">
+							value="#{modelOuvrage.courant.categorie}">
 							<f:selectItems value="#{utilAppli.categories}" var="categorie"
 								itemLabel="#{utilAppli.getLibelleCategorie(categorie)}" />
 						</h:selectOneMenu> <h:message for="categories" errorClass="error" /></td>

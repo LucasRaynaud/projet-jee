@@ -25,4 +25,6 @@ public interface IMapperEjb {
 
 	DtoOuvrage map(Ouvrage ouvrage);
 	
+	
+	
 }

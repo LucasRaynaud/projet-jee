@@ -10,13 +10,13 @@ public class DtoOuvrage implements Serializable {
 	private String auteur;
 	private Integer dateParution;
 	private DtoCompte proprietaire;
-	private DtoCategorie categorie;
+	private String categorie;
 	
 	public DtoOuvrage() {
 		super();
 	}
 	
-	public DtoOuvrage(int id,String titre,String auteur,Integer dateParution,DtoCategorie categorie,DtoCompte proprietaire) {
+	public DtoOuvrage(int id,String titre,String auteur,Integer dateParution,String categorie,DtoCompte proprietaire) {
 		super();
 		this.id = id;
 		this.titre = titre;
@@ -44,10 +44,10 @@ public class DtoOuvrage implements Serializable {
 	public void setAuteur(String auteur) {
 		this.auteur = auteur;
 	}
-	public DtoCategorie getCategorie() {
+	public String getCategorie() {
 		return categorie;
 	}
-	public void setCategorie(DtoCategorie categorie) {
+	public void setCategorie(String categorie) {
 		this.categorie = categorie;
 	}
 

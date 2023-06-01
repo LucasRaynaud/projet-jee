@@ -12,7 +12,6 @@ import javax.inject.Named;
 import projet.commun.dto.DtoOuvrage;
 import projet.commun.exception.ExceptionValidation;
 import projet.commun.service.IServiceOuvrage;
-import projet.jsf.data.CategorieOuvrage;
 import projet.jsf.data.Ouvrage;
 import projet.jsf.data.mapper.IMapper;
 import projet.jsf.util.CompteActif;
@@ -69,7 +68,7 @@ public class ModelOuvrage implements Serializable {
 	public String validerMiseAJour() {
 		try {
 			if ( courant.getId() == null) {
-				courant.setIdproprietaire(compteActif);
+				courant.setProprietaire(compteActif);
 				System.out.println(compteActif);
 				serviceOuvrage.inserer( mapper.map(courant) );
 			} else {

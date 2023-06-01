@@ -19,22 +19,19 @@ public class Ouvrage implements Serializable {
 
 	private String auteur;
 	
-	private Integer dateparution;
+	private Integer dateParution;
 
 	private String titre;
 
-	//bi-directional one-to-one association to CategorieOuvrage
-	@OneToOne(mappedBy="ouvrage")
-	private CategorieOuvrage categorieOuvrage;
+	private String categorieOuvrage;
 
 	//bi-directional many-to-one association to DemandeEmprunt
 	@OneToMany(mappedBy="ouvrage")
 	private List<DemandeEmprunt> demandeEmprunts;
 
-	//bi-directional many-to-one association to Compte
-	@ManyToOne
+	@OneToOne
 	@JoinColumn(name="idproprietaire")
-	private Compte compte;
+	private Compte proprietaire;
 
 	public Ouvrage() {
 	}
@@ -55,12 +52,12 @@ public class Ouvrage implements Serializable {
 		this.auteur = auteur;
 	}
 
-	public Integer getDateparution() {
-		return this.dateparution;
+	public Integer getDateParution() {
+		return this.dateParution;
 	}
 
-	public void setDateparution(Integer dateparution) {
-		this.dateparution = dateparution;
+	public void setDateParution(Integer dateparution) {
+		this.dateParution = dateparution;
 	}
 
 	public String getTitre() {
@@ -71,11 +68,11 @@ public class Ouvrage implements Serializable {
 		this.titre = titre;
 	}
 
-	public CategorieOuvrage getCategorieOuvrage() {
+	public String getCategorieOuvrage() {
 		return this.categorieOuvrage;
 	}
 
-	public void setCategorieOuvrage(CategorieOuvrage categorieOuvrage) {
+	public void setCategorieOuvrage(String categorieOuvrage) {
 		this.categorieOuvrage = categorieOuvrage;
 	}
 
@@ -101,12 +98,12 @@ public class Ouvrage implements Serializable {
 		return demandeEmprunt;
 	}
 
-	public Compte getCompte() {
-		return this.compte;
+	public Compte getProprietaire() {
+		return this.proprietaire;
 	}
 
-	public void setCompte(Compte compte) {
-		this.compte = compte;
+	public void setProprietaire(Compte compte) {
+		this.proprietaire = compte;
 	}
 
 }

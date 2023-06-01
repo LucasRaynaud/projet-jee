@@ -17,7 +17,7 @@ public class Ouvrage implements Serializable {
 	@Size(max = 30, message = "La longueur du nom de l'auteur ne doit pas dépasser 30 caractères.")
 	private String auteur;
 
-	private Integer dateparution;
+	private Integer dateParution;
 
 	@NotNull(message = "L'ouvrage doit avoir un propriétaire")
 	private Compte proprietaire;
@@ -26,8 +26,8 @@ public class Ouvrage implements Serializable {
 	@Size(max = 25, message = "Le titre ne doit pas dépasser 25 caractères.")
 	private String titre;
 
-	@NotNull(message = "La catégorie est obligatoire")
-	private CategorieOuvrage categorieOuvrage;
+	@NotBlank(message = "La catégorie est obligatoire")
+	private String categorie;
 
 	private List<DemandeEmprunt> demandeEmprunts = new ArrayList<>();
 
@@ -35,13 +35,13 @@ public class Ouvrage implements Serializable {
 	}
 
 	public Ouvrage(Integer id, String auteur, Integer dateparution, Compte proprietaire, String titre,
-			CategorieOuvrage categorieOuvrage) {
+			String categorieOuvrage) {
 		this.id = id;
 		this.auteur = auteur;
-		this.dateparution = dateparution;
+		this.dateParution = dateparution;
 		this.proprietaire = proprietaire;
 		this.titre = titre;
-		this.categorieOuvrage = categorieOuvrage;
+		this.categorie = categorieOuvrage;
 	}
 
 	public Integer getId() {
@@ -60,19 +60,19 @@ public class Ouvrage implements Serializable {
 		this.auteur = auteur;
 	}
 
-	public Integer getDateparution() {
-		return dateparution;
+	public Integer getDateParution() {
+		return dateParution;
 	}
 
-	public void setDateparution(Integer dateparution) {
-		this.dateparution = dateparution;
+	public void setDateParution(Integer dateparution) {
+		this.dateParution = dateparution;
 	}
 
-	public Compte getIdproprietaire() {
+	public Compte getProprietaire() {
 		return proprietaire;
 	}
 
-	public void setIdproprietaire(Compte idproprietaire) {
+	public void setProprietaire(Compte idproprietaire) {
 		this.proprietaire = idproprietaire;
 	}
 
@@ -84,12 +84,12 @@ public class Ouvrage implements Serializable {
 		this.titre = titre;
 	}
 
-	public CategorieOuvrage getCategorieOuvrage() {
-		return categorieOuvrage;
+	public String getCategorie() {
+		return categorie;
 	}
 
-	public void setCategorieOuvrage(CategorieOuvrage categorieOuvrage) {
-		this.categorieOuvrage = categorieOuvrage;
+	public void setCategorie(String categorieOuvrage) {
+		this.categorie = categorieOuvrage;
 	}
 
 	public List<DemandeEmprunt> getDemandeEmprunts() {

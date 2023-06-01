@@ -26,18 +26,18 @@ public class Ouvrage implements Serializable {
 	private String auteur;
 
 	@Column(name = "dateparution")
-	private Integer dateparution;
+	private Integer dateParution;
 
 	@JoinColumn(name = "idproprietaire")
 	@OneToOne
-	private Compte idproprietaire;
+	private Compte proprietaire;
 
 	@Column(name = "titre")
 	private String titre;
 
 	// bi-directional one-to-one association to CategorieOuvrage
-	@OneToOne(mappedBy = "ouvrage")
-	private CategorieOuvrage categorieOuvrage;
+	@Column(name = "categorie")
+	private String categorie;
 
 	// bi-directional many-to-one association to DemandeEmprunt
 	@OneToMany(mappedBy = "ouvrage")
@@ -62,20 +62,20 @@ public class Ouvrage implements Serializable {
 		this.auteur = auteur;
 	}
 
-	public Integer getDateparution() {
-		return this.dateparution;
+	public Integer getDateParution() {
+		return this.dateParution;
 	}
 
-	public void setDateparution(Integer dateparution) {
-		this.dateparution = dateparution;
+	public void setDateParution(Integer dateparution) {
+		this.dateParution = dateparution;
 	}
 
-	public Compte getIdproprietaire() {
-		return this.idproprietaire;
+	public Compte getProprietaire() {
+		return this.proprietaire;
 	}
 
-	public void setIdproprietaire(Compte idproprietaire) {
-		this.idproprietaire = idproprietaire;
+	public void setProprietaire(Compte idproprietaire) {
+		this.proprietaire = idproprietaire;
 	}
 
 	public String getTitre() {
@@ -84,14 +84,6 @@ public class Ouvrage implements Serializable {
 
 	public void setTitre(String titre) {
 		this.titre = titre;
-	}
-
-	public CategorieOuvrage getCategorieOuvrage() {
-		return this.categorieOuvrage;
-	}
-
-	public void setCategorieOuvrage(CategorieOuvrage categorieOuvrage) {
-		this.categorieOuvrage = categorieOuvrage;
 	}
 
 	public List<DemandeEmprunt> getDemandeEmprunts() {
@@ -115,5 +107,14 @@ public class Ouvrage implements Serializable {
 
 		return demandeEmprunt;
 	}
+
+	public String getCategorie() {
+		return categorie;
+	}
+
+	public void setCategorie(String categorieOuvrage) {
+		this.categorie = categorieOuvrage;
+	}
+	
 
 }
