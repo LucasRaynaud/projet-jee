@@ -2,7 +2,6 @@ package projet.ejb.dao;
 
 import java.util.List;
 
-import projet.ejb.data.Compte;
 import projet.ejb.data.DemandeAmi;
 
 public interface IDaoDemandeAmi {
@@ -15,4 +14,6 @@ public interface IDaoDemandeAmi {
 	DemandeAmi 		retrouver( int idDemandeAmi );
 
 	List<DemandeAmi> listerTout();
+
+	List<DemandeAmi> listerDemandeAmiCompte(int idCompte);
 }

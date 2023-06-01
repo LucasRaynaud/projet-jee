@@ -14,7 +14,7 @@ public class DemandeAmi implements Serializable {
 	@Id
 	@GeneratedValue( strategy = GenerationType.IDENTITY)
 	@Column( name = "iddemandeamis")
-	private Integer iddemandeamis;
+	private Integer id;
 
 	@Temporal(TemporalType.DATE)
 	@Column( name = "datedemande")
@@ -22,11 +22,11 @@ public class DemandeAmi implements Serializable {
 	
 	@JoinColumn( name = "idenvoyeur")
 	@OneToOne
-	private Compte idenvoyeur;
+	private Compte envoyeur;
 	
 	@JoinColumn( name = "idreceveur")
 	@OneToOne
-	private Compte idreceveur;
+	private Compte receveur;
 	
 	@Column( name = "statut")
 	private String statut;
@@ -34,36 +34,36 @@ public class DemandeAmi implements Serializable {
 	public DemandeAmi() {
 	}
 
-	public Integer getIddemandeamis() {
-		return this.iddemandeamis;
+	public Integer getId() {
+		return this.id;
 	}
 
-	public void setIddemandeamis(Integer iddemandeamis) {
-		this.iddemandeamis = iddemandeamis;
+	public void setId(Integer iddemandeamis) {
+		this.id = iddemandeamis;
 	}
 
-	public Date getDatedemande() {
+	public Date getDateDemande() {
 		return this.datedemande;
 	}
 
-	public void setDatedemande(Date datedemande) {
+	public void setDateDemande(Date datedemande) {
 		this.datedemande = datedemande;
 	}
 
-	public Compte getIdenvoyeur() {
-		return this.idenvoyeur;
+	public Compte getEnvoyeur() {
+		return this.envoyeur;
 	}
 
-	public void setIdenvoyeur(Compte idenvoyeur) {
-		this.idenvoyeur = idenvoyeur;
+	public void setEnvoyeur(Compte idenvoyeur) {
+		this.envoyeur = idenvoyeur;
 	}
 
-	public Compte getIdreceveur() {
-		return this.idreceveur;
+	public Compte getReceveur() {
+		return this.receveur;
 	}
 
-	public void setIdreceveur(Compte idreceveur) {
-		this.idreceveur = idreceveur;
+	public void setReceveur(Compte idreceveur) {
+		this.receveur = idreceveur;
 	}
 
 	public String getStatut() {

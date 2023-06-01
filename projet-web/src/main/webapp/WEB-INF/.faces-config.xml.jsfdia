@@ -8,12 +8,21 @@
    <PROCESS-ITEM-OUTPUT ID="comptes::#pages#admin#compte#liste.xhtml"
     NAME="output2" PATH="/pages/admin/compte/liste.xhtml" SHAPE="-1,40"
     TARGET="rules:#pages#admin#compte#liste.xhtml" TITLE="comptes" model-entity="JSFProcessItemOutput"/>
+<<<<<<< HEAD
    <PROCESS-ITEM-OUTPUT ID="ouvrages::#pages#admin#ouvrage#liste.xhtml"
     NAME="output1" PATH="/pages/admin/ouvrage/liste.xhtml"
     TARGET="rules:#pages#admin#ouvrage#liste.xhtml" TITLE="ouvrages" model-entity="JSFProcessItemOutput"/>
    <PROCESS-ITEM-OUTPUT ID="emprunts::#pages#user#emprunt#liste.xhtml"
     NAME="output3" PATH="/pages/user/emprunt/liste.xhtml"
     TARGET="rules:#pages#user#emprunt#liste.xhtml" TITLE="emprunts" model-entity="JSFProcessItemOutput"/>
+=======
+   <PROCESS-ITEM-OUTPUT ID="ouvrages::#pages#user#ouvrage#liste.xhtml"
+    NAME="output1" PATH="/pages/user/ouvrage/liste.xhtml"
+    TARGET="rules:#pages#user#ouvrage#liste.xhtml" TITLE="ouvrages" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="amis::#pages#user#demandeami#liste.xhtml"
+    NAME="output3" PATH="/pages/user/demandeami/liste.xhtml"
+    TARGET="rules:#pages#user#demandeami#liste.xhtml" TITLE="amis" model-entity="JSFProcessItemOutput"/>
+>>>>>>> refs/heads/Lucas-dev
    <PROCESS-ITEM-OUTPUT ID="info::#pages#info.xhtml" NAME="output4"
     PATH="/pages/info.xhtml" TARGET="rules:#pages#info.xhtml"
     TITLE="info" model-entity="JSFProcessItemOutput"/>
@@ -25,8 +34,15 @@
   PATH="/pages/admin/compte/liste.xhtml" SHAPE="328,88,50,25" model-entity="JSFProcessGroup"/>
  <PROCESS-ITEM NAME="rules:#pages#info.xhtml" PATH="/pages/info.xhtml"
   SHAPE="320,128,50,25" model-entity="JSFProcessGroup" persistent="true"/>
+<<<<<<< HEAD
  <PROCESS-ITEM NAME="rules:#pages#admin#ouvrage#liste.xhtml"
   PATH="/pages/admin/ouvrage/liste.xhtml" SHAPE="288,353,0,0" model-entity="JSFProcessGroup"/>
  <PROCESS-ITEM NAME="rules:#pages#user#emprunt#liste.xhtml"
   PATH="/pages/user/emprunt/liste.xhtml" SHAPE="304,385,0,0" model-entity="JSFProcessGroup"/>
+=======
+ <PROCESS-ITEM NAME="rules:#pages#user#demandeami#liste.xhtml"
+  PATH="/pages/user/demandeami/liste.xhtml" SHAPE="304,385,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#pages#user#ouvrage#liste.xhtml"
+  PATH="/pages/user/ouvrage/liste.xhtml" SHAPE="304,385,0,0" model-entity="JSFProcessGroup"/>
+>>>>>>> refs/heads/Lucas-dev
 </PROCESS>

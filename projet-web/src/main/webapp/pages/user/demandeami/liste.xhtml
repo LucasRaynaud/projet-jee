@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/template/page-standard.xhtml">
+
+	<ui:define name="titre">Demande d'ami</ui:define>
+
+	<ui:define name="contenu">
+
+		<h:form>
+
+			<h:dataTable styleClass="liste" value="#{modelDemandeAmi.liste}"
+				var="item">
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Envoyeur" />
+					</f:facet>
+				#{item.envoyeur.pseudo}
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Statut" />
+					</f:facet>
+				#{item.statut}
+			</h:column>
+
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Date de la demande" />
+					</f:facet>
+				#{item.dateDemande}
+			</h:column>
+
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Actions" />
+					</f:facet>
+					<h:commandButton action="#{modelDemandeAmi.supprimer(item)}"
+						value="Refuser" image="#{ resource['images:supprimer.png'] }"
+						title="Refuser" styleClass="image-action">
+					</h:commandButton>
+				</h:column>
+
+			</h:dataTable>
+			<br/>
+			<h:button value="Nouvelle demande" outcome="formulaire" />
+
+		</h:form>
+
+	</ui:define>
+
+</ui:composition>

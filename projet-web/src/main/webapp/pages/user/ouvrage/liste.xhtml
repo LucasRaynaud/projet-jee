@@ -31,16 +31,16 @@
 					<f:facet name="header">
 						<h:outputText value="Date de parution" />
 					</f:facet>
-				#{item.dateParution}
+				#{item.dateparution}
 			</h:column>
 
 				<h:column>
 					<f:facet name="header">
 						<h:outputText value="Catégorie" />
 					</f:facet>
-					<ui:repeat value="#{item.categorie}" var="categorie"
+					<ui:repeat value="#{item.categorieOuvrage}" var="categorie"
 						varStatus="status">
-					#{utilAppli.getLibelleCategorie(categorie)}#{not status.last ? ', ' : ''}
+					#{utilAppli.getLibelleCategorie()}#{not status.last ? ', ' : ''}
 				</ui:repeat>
 				</h:column>
 
