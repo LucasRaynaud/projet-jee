@@ -2,6 +2,7 @@ package projet.jsf.model.standard;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -14,6 +15,7 @@ import projet.commun.dto.DtoOuvrage;
 import projet.commun.exception.ExceptionValidation;
 import projet.commun.service.IServiceDemandeEmprunt;
 import projet.commun.service.IServiceOuvrage;
+import projet.jsf.data.DemandeAmi;
 import projet.jsf.data.DemandeEmprunt;
 import projet.jsf.data.Ouvrage;
 import projet.jsf.data.mapper.IMapper;
@@ -26,6 +28,8 @@ import projet.jsf.util.UtilJsf;
 public class ModelDemandeEmprunt implements Serializable {
 
 	private List<DemandeEmprunt> liste;
+	private List<DemandeEmprunt> listeEnAttente;
+	private List<DemandeEmprunt> listeRecu;
 
 	private DemandeEmprunt courant;
 	
@@ -46,6 +50,26 @@ public class ModelDemandeEmprunt implements Serializable {
 			}
 		}
 		return liste;
+	}
+	
+	public List<DemandeEmprunt> getListeEnAttente() {
+		if (listeEnAttente == null) {
+			listeEnAttente = new ArrayList<>();
+			for (DtoDemandeEmprunt dtoDemandeEmprunt : serviceDemandeEmprunt.listerDemandeEmpruntRecu(mapper.map(compteActif))) {
+				listeEnAttente.add(mapper.map(dtoDemandeEmprunt));
+			}
+		}
+		return listeEnAttente;
+	}
+	
+	public List<DemandeEmprunt> getListeDemandee() {
+		if (listeRecu == null) {
+			listeRecu = new ArrayList<>();
+			for (DtoDemandeEmprunt dtoDemandeEmprunt : serviceDemandeEmprunt.listerDemandeEnvoye(mapper.map(compteActif))) {
+				listeRecu.add(mapper.map(dtoDemandeEmprunt));
+			}
+		}
+		return listeRecu;
 	}
 
 	public DemandeEmprunt getCourant() {
@@ -87,11 +111,23 @@ public class ModelDemandeEmprunt implements Serializable {
 	public String supprimer( DemandeEmprunt item ) {
 		try {
 			serviceDemandeEmprunt.supprimer( item.getId() );
-			liste.remove(item);
+			listeEnAttente.remove(item);
 			UtilJsf.messageInfo( "Suppression effectuée avec succès." );
 		} catch (ExceptionValidation e) {
 			UtilJsf.messageError( e ); 
 		}
 		return null;
+	}
+	
+	public String valider(DemandeEmprunt item) {
+		try {
+			item.setStatut("ACCEPTEE");
+			item.setDateemprunt(new Date());
+			serviceDemandeEmprunt.modifier(mapper.map(item));
+			return "liste";
+		} catch (ExceptionValidation e) {
+			UtilJsf.messageError(e);
+			return null;
+		}
 	}
 }

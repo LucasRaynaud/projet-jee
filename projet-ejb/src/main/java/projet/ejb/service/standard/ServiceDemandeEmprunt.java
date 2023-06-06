@@ -1,6 +1,7 @@
 package projet.ejb.service.standard;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.Remote;
@@ -17,6 +18,7 @@ import projet.ejb.dao.IDaoCompte;
 import projet.ejb.dao.IDaoDemandeAmi;
 import projet.ejb.dao.IDaoDemandeEmprunt;
 import projet.ejb.data.Compte;
+import projet.ejb.data.DemandeAmi;
 import projet.ejb.data.DemandeEmprunt;
 import projet.ejb.data.mapper.IMapperEjb;
 
@@ -36,6 +38,9 @@ public class ServiceDemandeEmprunt implements IServiceDemandeEmprunt{
 	
 	@Override
 	public int inserer(DtoDemandeEmprunt dtoDemandeEmprunt) throws ExceptionValidation {
+		dtoDemandeEmprunt.setStatut("EN ATTENTE");
+		dtoDemandeEmprunt.setDateemprunt(new Date());
+		
 		int id = daoDemandeEmprunt.inserer(mapper.map(dtoDemandeEmprunt));
 		return id;
 	}
@@ -65,7 +70,49 @@ public class ServiceDemandeEmprunt implements IServiceDemandeEmprunt{
 		}
 		return liste;
 	}
-	
+
 	// Méthodes auxiliaires
+	
+		@Override
+		public List<DtoDemandeEmprunt> listerDemandeEmpruntRecu(DtoCompte DtoCompte) {
+			List<DtoDemandeEmprunt> liste = new ArrayList<>();
+			for (DemandeEmprunt compte : daoDemandeEmprunt.listerDemandeEmpruntRecu(mapper.map(DtoCompte))) {
+				liste.add(mapper.map(compte));
+			}
+			return liste;
+		}
+		
+		@Override
+		public List<DtoDemandeEmprunt> listerDemandeEnvoye(DtoCompte DtoCompte) {
+			List<DtoDemandeEmprunt> liste = new ArrayList<>();
+			for (DemandeEmprunt compte : daoDemandeEmprunt.listerDemandeEnvoye(mapper.map(DtoCompte))) {
+				liste.add(mapper.map(compte));
+			}
+			return liste;
+		}
+		
+		@Override
+		public List<DtoDemandeEmprunt> listerEmpruntes(DtoCompte dtoCompte) {
+			List<DtoDemandeEmprunt> liste = new ArrayList<>();
+			for (DemandeEmprunt compte : daoDemandeEmprunt.listerEmpruntes(mapper.map(dtoCompte))) {
+				liste.add(mapper.map(compte));
+			}
+			return liste;
+		}
+		
+		//TODO
+		// Fix erreur quand throws exception
+		private void verifierUniciteDemandeEmprunt(DtoDemandeEmprunt dtoDemandeEmprunt) throws ExceptionValidation {
+
+			StringBuilder message = new StringBuilder();
+
+			if (!daoDemandeEmprunt.verifierUniciteDemandeEmprunt(mapper.map(dtoDemandeEmprunt))) {
+				message.append("\nUne demande d'emprunt existe déja");
+			}
+				
+			if (message.length() > 0) {
+				throw new ExceptionValidation(message.toString().substring(1));
+			}
+		}
 
 }

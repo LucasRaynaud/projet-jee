@@ -24,43 +24,19 @@
 							for="id" errorClass="error" /></td>
 				</tr>
 				<tr>
-					<td><h:outputLabel for="titre">Titre :</h:outputLabel></td>
-					<td><h:inputText id="titre" size="25"
-							value="#{modelOuvrage.courant.titre}" /> <br /> <h:message
-							for="titre" errorClass="error" /></td>
-				</tr>
-				<tr>
-					<td><h:outputLabel for="auteur">Auteur :</h:outputLabel></td>
-					<td><h:inputText id="auteur" size="30"
-							value="#{modelOuvrage.courant.auteur}" /> <br /> <h:message
-							for="auteur" errorClass="error" /></td>
-				</tr>
-				<tr>
-					<td><h:outputLabel for="dateparution">Date de parution :</h:outputLabel>
-					</td>
-					<td><h:inputText id="dateparution" size="4"
-							value="#{modelOuvrage.courant.dateParution}" /> <br /> <h:message
-							for="dateparution" errorClass="error" /></td>
-				</tr>
-				<tr>
-					<td><h:outputLabel for="categorie">Categorie :</h:outputLabel>
-					</td>
-					<td><h:selectOneMenu id="categories" layout="pageDirection"
-							value="#{modelOuvrage.courant.categorie}">
-							<f:selectItems value="#{utilAppli.categories}" var="categorie"
-								itemLabel="#{utilAppli.getLibelleCategorie(categorie)}" />
-						</h:selectOneMenu> <h:message for="categories" errorClass="error" /></td>
-				</tr>
-				<tr>
-					<td><h:outputLabel for="idproprietaire">Proprietaire :</h:outputLabel>
-					</td>
-					<td><h:inputText id="idproprietaire" value="#{compteActif.id}"
-							readonly="true" /> <br /></td>
+					<td><h:outputLabel for="amis">Ouvrages :</h:outputLabel></td>
+					<td><h:selectOneMenu id="ouvrage" layout="pageDirection"
+							value="#{modelDemandeEmprunt.courant.ouvrage}"
+							converter="#{converterOuvrage}">
+							<f:selectItems value="#{modelOuvrage.liste}"
+								var="ouvrage" itemLabel="#{ouvrage.titre}"
+								itemValue="#{ouvrage}" />
+						</h:selectOneMenu> <h:message for="ouvrage" errorClass="error" /></td>
 				</tr>
 			</table>
 			<br />
 			<h:commandButton value="Valider"
-				action="#{modelOuvrage.validerMiseAJour()}" />
+				action="#{modelDemandeEmprunt.validerMiseAJour()}" />
 			<h:button value="Retour" outcome="ouvrages" />
 		</h:form>
 

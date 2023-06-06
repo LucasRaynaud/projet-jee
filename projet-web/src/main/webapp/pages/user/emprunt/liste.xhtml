@@ -11,11 +11,14 @@
 
 		<h:form>
 
-			<h:dataTable styleClass="liste" value="#{modelDemandeEmprunt.liste}"
+			<h:dataTable styleClass="liste" value="#{modelDemandeEmprunt.listeDemandee}"
 				var="item">
+				<f:facet name="header">
+					<h:outputText value="Vos demandes" />
+				</f:facet>
 				<h:column>
 					<f:facet name="header">
-						<h:outputText value="Ouvrage" />
+						<h:outputText value="ouvrage" />
 					</f:facet>
 				#{item.ouvrage.titre}
 			</h:column>
@@ -68,6 +71,70 @@
 
 			<br />
 			<h:button value="Ajouter" outcome="formulaire" />
+			<br />
+
+		</h:form>
+		
+		<h:form>
+
+			<h:dataTable styleClass="liste" value="#{modelDemandeEmprunt.listeEnAttente}"
+				var="item">
+				<f:facet name="header">
+					<h:outputText value="Demande en attentes" />
+				</f:facet>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Ouvrage" />
+					</f:facet>
+				#{item.ouvrage.titre}
+			</h:column>
+
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Proprietaire" />
+					</f:facet>
+				#{item.ouvrage.proprietaire.pseudo}
+			</h:column>
+			
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Emprunteur" />
+					</f:facet>
+				#{item.emprunteur.pseudo}
+			</h:column>
+
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Date de l'emprunt" />
+					</f:facet>
+				#{item.dateemprunt}
+			</h:column>
+
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Statut" />
+					</f:facet>
+				#{item.statut}
+			</h:column>
+
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Actions" />
+					</f:facet>
+					<h:commandButton action="#{modelDemandeEmprunt.valider(item)}"
+						value="Valider" image="#{ resource['images:valider.png'] }"
+						title="Valider" styleClass="image-action">
+					</h:commandButton>
+
+					<h:commandButton action="#{modelDemandeEmprunt.supprimer(item)}"
+						value="Refuser" image="#{ resource['images:refuser.png'] }"
+						title="Refuser" styleClass="image-action">
+					</h:commandButton>
+				</h:column>
+
+			</h:dataTable>
+
+			<br />
 
 		</h:form>
 

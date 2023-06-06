@@ -11,6 +11,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import projet.ejb.dao.IDaoDemandeEmprunt;
+import projet.ejb.data.Compte;
+import projet.ejb.data.DemandeAmi;
 import projet.ejb.data.DemandeEmprunt;
 
 @Stateless
@@ -23,7 +25,7 @@ public class DaoDemandeEmprunt implements IDaoDemandeEmprunt{
 
 	@Override
 	public int inserer(DemandeEmprunt demandeEmprunt) {
-		em.persist(demandeEmprunt);
+		em.merge(demandeEmprunt);
 		em.flush();
 		return demandeEmprunt.getId();
 	}
@@ -46,8 +48,42 @@ public class DaoDemandeEmprunt implements IDaoDemandeEmprunt{
 	@Override
 	public List<DemandeEmprunt> listerTout() {
 		em.clear();
-		var jpql = "SELECT o FROM DemandeEmprunt";
+		var jpql = "SELECT d FROM DemandeEmprunt d";
 		var query = em.createQuery(jpql,DemandeEmprunt.class);
+		return query.getResultList();
+	}
+
+	@Override
+	public List<DemandeEmprunt> listerDemandeEmpruntRecu(Compte idCompte) {
+		em.clear();
+		var jpql = "SELECT d FROM DemandeEmprunt d JOIN Ouvrage o ON d.ouvrage = o.id WHERE o.proprietaire=:idCompte AND statut='EN ATTENTE'";
+		var query = em.createQuery(jpql, DemandeEmprunt.class);
+		query.setParameter("idCompte", idCompte);
+		return query.getResultList();
+	}
+
+	@Override
+	public boolean verifierUniciteDemandeEmprunt(DemandeEmprunt demandeEmprunt) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public List<DemandeEmprunt> listerEmpruntes(Compte map) {
+		em.clear();
+		var jpql = "SELECT d FROM DemandeEmprunt d WHERE statut='ACCEPTEE' AND (receveur=:idReceveur OR envoyeur=:idEnvoyeur)";
+		var query = em.createQuery(jpql, DemandeEmprunt.class);
+		query.setParameter("idReceveur", map);
+		query.setParameter("idEnvoyeur", map);
+		return query.getResultList();
+	}
+
+	@Override
+	public List<DemandeEmprunt> listerDemandeEnvoye(Compte idCompte) {
+		em.clear();
+		var jpql = "SELECT d FROM DemandeEmprunt d WHERE emprunteur=:idCompte AND statut='EN ATTENTE'";
+		var query = em.createQuery(jpql, DemandeEmprunt.class);
+		query.setParameter("idCompte", idCompte);
 		return query.getResultList();
 	}
 
