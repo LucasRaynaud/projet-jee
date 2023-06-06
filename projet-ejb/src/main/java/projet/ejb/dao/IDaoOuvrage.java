@@ -2,6 +2,7 @@ package projet.ejb.dao;
 
 import java.util.List;
 
+import projet.commun.dto.DtoCompte;
 import projet.ejb.data.Ouvrage;
 
 public interface IDaoOuvrage {
@@ -15,5 +16,7 @@ public interface IDaoOuvrage {
 	Ouvrage 	retrouver( int idOuvrage );
 
 	List<Ouvrage> listerTout();
+
+	List<Ouvrage> listerOuvragesEmpruntes(DtoCompte map);
 	
 }

@@ -12,7 +12,7 @@
 		<h:form>
 
 			<h:dataTable styleClass="liste" value="#{modelOuvrage.liste}"
-				var="item">
+				var="item" rendered="#{not empty modelOuvrage.liste}">
 				<h:column>
 					<f:facet name="header">
 						<h:outputText value="Titre" />
@@ -31,14 +31,14 @@
 					<f:facet name="header">
 						<h:outputText value="Date de parution" />
 					</f:facet>
-				#{item.dateparution}
+				#{item.dateParution}
 			</h:column>
 
 				<h:column>
 					<f:facet name="header">
 						<h:outputText value="Catégorie" />
 					</f:facet>
-					<ui:repeat value="#{item.categorieOuvrage}" var="categorie"
+					<ui:repeat value="#{item.categorie}" var="categorie"
 						varStatus="status">
 					#{utilAppli.getLibelleCategorie()}#{not status.last ? ', ' : ''}
 				</ui:repeat>
@@ -52,6 +52,62 @@
 						image="#{ resource['images:modifier.png'] }" title="Modifier"
 						styleClass="image-action" />
 					<h:commandButton action="#{modelOuvrage.supprimer(item)}"
+						value="Supprimer"
+						onclick="return confirm('Confirmez-vous la suppression ?')"
+						image="#{ resource['images:supprimer.png'] }" title="Supprimer"
+						styleClass="image-action">
+						<f:ajax render="@form" execute="@form" />
+					</h:commandButton>
+				</h:column>
+
+			</h:dataTable>
+
+			<br />
+			<h:button value="Ajouter" outcome="formulaire" />
+
+		</h:form>
+		
+		<h:dataTable styleClass="liste" value="#{modelOuvrage.listeOuvrageEmpruntes}"
+				var="item" rendered="#{not empty modelOuvrage.listeOuvrageEmpruntes}">
+				<f:facet name="header">
+						<h:outputText value="Liste des livres empruntés" />
+					</f:facet>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Titre" />
+					</f:facet>
+				#{item.titre}
+			</h:column>
+
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Auteur" />
+					</f:facet>
+				#{item.auteur}
+			</h:column>
+
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Date de parution" />
+					</f:facet>
+				#{item.dateParution}
+			</h:column>
+
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Catégorie" />
+					</f:facet>
+					<ui:repeat value="#{item.categorie}" var="categorie"
+						varStatus="status">
+					#{utilAppli.getLibelleCategorie()}#{not status.last ? ', ' : ''}
+				</ui:repeat>
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Actions" />
+					</f:facet>
+					<h:commandButton action="#{modelDemandeEmprunt.supprimerEmprunt(item)}"
 						value="Supprimer"
 						onclick="return confirm('Confirmez-vous la suppression ?')"
 						image="#{ resource['images:supprimer.png'] }" title="Supprimer"

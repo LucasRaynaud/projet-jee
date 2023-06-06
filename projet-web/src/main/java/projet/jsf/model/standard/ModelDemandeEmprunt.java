@@ -10,10 +10,8 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import projet.commun.dto.DtoDemandeEmprunt;
-import projet.commun.dto.DtoOuvrage;
 import projet.commun.exception.ExceptionValidation;
 import projet.commun.service.IServiceDemandeEmprunt;
-import projet.commun.service.IServiceOuvrage;
 import projet.jsf.data.DemandeEmprunt;
 import projet.jsf.data.Ouvrage;
 import projet.jsf.data.mapper.IMapper;
@@ -28,7 +26,7 @@ public class ModelDemandeEmprunt implements Serializable {
 	private List<DemandeEmprunt> liste;
 
 	private DemandeEmprunt courant;
-	
+
 	@Inject
 	private CompteActif compteActif;
 
@@ -67,31 +65,39 @@ public class ModelDemandeEmprunt implements Serializable {
 		}
 		return null;
 	}
-	
+
 	public String validerMiseAJour() {
 		try {
-			if ( courant.getId() == null) {
+			if (courant.getId() == null) {
 				courant.setEmprunteur(compteActif);
-				serviceDemandeEmprunt.inserer( mapper.map(courant) );
+				serviceDemandeEmprunt.inserer(mapper.map(courant));
 			} else {
-				serviceDemandeEmprunt.modifier( mapper.map(courant) );
+				serviceDemandeEmprunt.modifier(mapper.map(courant));
 			}
-			UtilJsf.messageInfo( "Mise à jour effectuée avec succès." );
+			UtilJsf.messageInfo("Mise à jour effectuée avec succès.");
 			return "liste";
 		} catch (ExceptionValidation e) {
 			UtilJsf.messageError(e);
 			return null;
 		}
 	}
-	
-	public String supprimer( DemandeEmprunt item ) {
+
+	public String supprimer(DemandeEmprunt item) {
 		try {
-			serviceDemandeEmprunt.supprimer( item.getId() );
+			serviceDemandeEmprunt.supprimer(item.getId());
 			liste.remove(item);
-			UtilJsf.messageInfo( "Suppression effectuée avec succès." );
+			UtilJsf.messageInfo("Suppression effectuée avec succès.");
 		} catch (ExceptionValidation e) {
-			UtilJsf.messageError( e ); 
+			UtilJsf.messageError(e);
 		}
 		return null;
+	}
+
+	public void supprimerEmprunt(Ouvrage ouvrage) {
+		supprimer(getEmpruntFromOuvrage(ouvrage));
+	}
+	
+	public DemandeEmprunt getEmpruntFromOuvrage(Ouvrage ouvrage) {
+		return mapper.map(serviceDemandeEmprunt.getEmpruntFromOuvrage(mapper.map(ouvrage),mapper.map(compteActif)));
 	}
 }

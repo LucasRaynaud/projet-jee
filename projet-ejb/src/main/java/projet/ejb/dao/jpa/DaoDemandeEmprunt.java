@@ -10,16 +10,19 @@ import javax.ejb.TransactionAttribute;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import projet.commun.dto.DtoDemandeEmprunt;
 import projet.ejb.dao.IDaoDemandeEmprunt;
+import projet.ejb.data.Compte;
 import projet.ejb.data.DemandeEmprunt;
+import projet.ejb.data.Ouvrage;
 
 @Stateless
 @Local
-@TransactionAttribute( MANDATORY )
-public class DaoDemandeEmprunt implements IDaoDemandeEmprunt{
-	
+@TransactionAttribute(MANDATORY)
+public class DaoDemandeEmprunt implements IDaoDemandeEmprunt {
+
 	@PersistenceContext
-	private EntityManager	em;
+	private EntityManager em;
 
 	@Override
 	public int inserer(DemandeEmprunt demandeEmprunt) {
@@ -47,8 +50,20 @@ public class DaoDemandeEmprunt implements IDaoDemandeEmprunt{
 	public List<DemandeEmprunt> listerTout() {
 		em.clear();
 		var jpql = "SELECT o FROM DemandeEmprunt";
-		var query = em.createQuery(jpql,DemandeEmprunt.class);
+		var query = em.createQuery(jpql, DemandeEmprunt.class);
 		return query.getResultList();
+	}
+
+	@Override
+	public DtoDemandeEmprunt getEmpruntFromOuvrage(Ouvrage ouvrage, Compte compteActif) {
+		em.clear();
+		var jpql = "SELECT o FROM DemandeEmprunt d "
+				+ "JOIN Ouvrage o ON d.proprietaire=o.proprietaire "
+				+ "WHERE o.proprietaire=:compteActif AND o.id=:ouvrage";
+		var query = em.createQuery(jpql,DtoDemandeEmprunt.class);
+		query.setParameter("compteActif", compteActif);
+		query.setParameter("ouvrage", ouvrage);
+		return query.getSingleResult();
 	}
 
 }

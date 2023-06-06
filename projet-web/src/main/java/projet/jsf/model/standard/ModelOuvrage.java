@@ -24,6 +24,8 @@ public class ModelOuvrage implements Serializable {
 
 	private List<Ouvrage> liste;
 
+	private List<Ouvrage> listeOuvragesEmpruntes;
+	
 	private Ouvrage courant;
 	
 	@Inject
@@ -44,7 +46,17 @@ public class ModelOuvrage implements Serializable {
 		}
 		return liste;
 	}
-
+	
+	public List<Ouvrage> getListeOuvrageEmpruntes(){
+		if (listeOuvragesEmpruntes == null) {
+			listeOuvragesEmpruntes = new ArrayList<>();
+			for (DtoOuvrage dtoOuvrage : serviceOuvrage.listerOuvragesEmpruntes(mapper.map(compteActif))) {
+				liste.add(mapper.map(dtoOuvrage));
+			}
+		}
+		return listeOuvragesEmpruntes;
+	}
+	
 	public Ouvrage getCourant() {
 		if (courant == null) {
 			courant = new Ouvrage();
