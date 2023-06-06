@@ -19,7 +19,7 @@ public final class CategorieOuvrage {
 			BD
 	) );
 
-	private static final String[]	 	libellés = new String[] {
+	private static final String[]	 	libelles = new String[] {
 			"Livre",
 			"Magazine",
 			"BD"
@@ -42,7 +42,7 @@ public final class CategorieOuvrage {
 		if ( index == -1 ) {
 			throw new IllegalArgumentException();
 		} 
-		return libellés[index];
+		return libelles[index];
 	}
 	
 }

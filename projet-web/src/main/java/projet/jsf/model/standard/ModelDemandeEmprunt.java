@@ -9,9 +9,12 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import projet.commun.dto.DtoDemandeEmprunt;
 import projet.commun.dto.DtoOuvrage;
 import projet.commun.exception.ExceptionValidation;
+import projet.commun.service.IServiceDemandeEmprunt;
 import projet.commun.service.IServiceOuvrage;
+import projet.jsf.data.DemandeEmprunt;
 import projet.jsf.data.Ouvrage;
 import projet.jsf.data.mapper.IMapper;
 import projet.jsf.util.CompteActif;
@@ -20,41 +23,41 @@ import projet.jsf.util.UtilJsf;
 @SuppressWarnings("serial")
 @Named
 @ViewScoped
-public class ModelOuvrage implements Serializable {
+public class ModelDemandeEmprunt implements Serializable {
 
-	private List<Ouvrage> liste;
+	private List<DemandeEmprunt> liste;
 
-	private Ouvrage courant;
+	private DemandeEmprunt courant;
 	
 	@Inject
 	private CompteActif compteActif;
 
 	@EJB
-	private IServiceOuvrage serviceOuvrage;
+	private IServiceDemandeEmprunt serviceDemandeEmprunt;
 
 	@Inject
 	private IMapper mapper;
 
-	public List<Ouvrage> getListe() {
+	public List<DemandeEmprunt> getListe() {
 		if (liste == null) {
 			liste = new ArrayList<>();
-			for (DtoOuvrage dtoOuvrage : serviceOuvrage.listerTout()) {
-				liste.add(mapper.map(dtoOuvrage));
+			for (DtoDemandeEmprunt dtoDemandeEmprunt : serviceDemandeEmprunt.listerTout()) {
+				liste.add(mapper.map(dtoDemandeEmprunt));
 			}
 		}
 		return liste;
 	}
 
-	public Ouvrage getCourant() {
+	public DemandeEmprunt getCourant() {
 		if (courant == null) {
-			courant = new Ouvrage();
+			courant = new DemandeEmprunt();
 		}
 		return courant;
 	}
 
 	public String actualiserCourant() {
 		if (courant != null) {
-			DtoOuvrage dto = serviceOuvrage.retrouver(courant.getId());
+			DtoDemandeEmprunt dto = serviceDemandeEmprunt.retrouver(courant.getId());
 			if (dto == null) {
 				UtilJsf.messageError("L'ouvrage demandé n'existe pas");
 				return "test/liste";
@@ -68,11 +71,10 @@ public class ModelOuvrage implements Serializable {
 	public String validerMiseAJour() {
 		try {
 			if ( courant.getId() == null) {
-				courant.setProprietaire(compteActif);
-				System.out.println(compteActif);
-				serviceOuvrage.inserer( mapper.map(courant) );
+				courant.setEmprunteur(compteActif);
+				serviceDemandeEmprunt.inserer( mapper.map(courant) );
 			} else {
-				serviceOuvrage.modifier( mapper.map(courant) );
+				serviceDemandeEmprunt.modifier( mapper.map(courant) );
 			}
 			UtilJsf.messageInfo( "Mise à jour effectuée avec succès." );
 			return "liste";
@@ -82,9 +84,9 @@ public class ModelOuvrage implements Serializable {
 		}
 	}
 	
-	public String supprimer( Ouvrage item ) {
+	public String supprimer( DemandeEmprunt item ) {
 		try {
-			serviceOuvrage.supprimer( item.getId() );
+			serviceDemandeEmprunt.supprimer( item.getId() );
 			liste.remove(item);
 			UtilJsf.messageInfo( "Suppression effectuée avec succès." );
 		} catch (ExceptionValidation e) {

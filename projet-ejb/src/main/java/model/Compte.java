@@ -180,14 +180,14 @@ public class Compte implements Serializable {
 
 	public Ouvrage addOuvrage(Ouvrage ouvrage) {
 		getOuvrages().add(ouvrage);
-		ouvrage.setCompte(this);
+		ouvrage.setProprietaire(this);
 
 		return ouvrage;
 	}
 
 	public Ouvrage removeOuvrage(Ouvrage ouvrage) {
 		getOuvrages().remove(ouvrage);
-		ouvrage.setCompte(null);
+		ouvrage.setProprietaire(null);
 
 		return ouvrage;
 	}

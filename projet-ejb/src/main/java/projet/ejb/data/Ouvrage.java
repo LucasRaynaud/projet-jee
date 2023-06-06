@@ -5,6 +5,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * The persistent class for the ouvrage database table.
@@ -19,25 +20,25 @@ public class Ouvrage implements Serializable {
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "idouvrage")
-	private Integer idouvrage;
+	private Integer id;
 
 	// @NotBlank( message = "Le Nom de l'auteur doit etre renseigné")
 	@Column(name = "auteur")
 	private String auteur;
 
 	@Column(name = "dateparution")
-	private Integer dateparution;
+	private Integer dateParution;
 
 	@JoinColumn(name = "idproprietaire")
 	@OneToOne
-	private Compte idproprietaire;
+	private Compte proprietaire;
 
 	@Column(name = "titre")
 	private String titre;
 
 	// bi-directional one-to-one association to CategorieOuvrage
-	@OneToOne(mappedBy = "ouvrage")
-	private CategorieOuvrage categorieOuvrage;
+	@Column(name = "categorie")
+	private String categorie;
 
 	// bi-directional many-to-one association to DemandeEmprunt
 	@OneToMany(mappedBy = "ouvrage")
@@ -46,12 +47,12 @@ public class Ouvrage implements Serializable {
 	public Ouvrage() {
 	}
 
-	public Integer getIdouvrage() {
-		return this.idouvrage;
+	public Integer getId() {
+		return this.id;
 	}
 
-	public void setIdouvrage(Integer idouvrage) {
-		this.idouvrage = idouvrage;
+	public void setId(Integer idouvrage) {
+		this.id = idouvrage;
 	}
 
 	public String getAuteur() {
@@ -62,20 +63,20 @@ public class Ouvrage implements Serializable {
 		this.auteur = auteur;
 	}
 
-	public Integer getDateparution() {
-		return this.dateparution;
+	public Integer getDateParution() {
+		return this.dateParution;
 	}
 
-	public void setDateparution(Integer dateparution) {
-		this.dateparution = dateparution;
+	public void setDateParution(Integer dateparution) {
+		this.dateParution = dateparution;
 	}
 
-	public Compte getIdproprietaire() {
-		return this.idproprietaire;
+	public Compte getProprietaire() {
+		return this.proprietaire;
 	}
 
-	public void setIdproprietaire(Compte idproprietaire) {
-		this.idproprietaire = idproprietaire;
+	public void setProprietaire(Compte idproprietaire) {
+		this.proprietaire = idproprietaire;
 	}
 
 	public String getTitre() {
@@ -84,14 +85,6 @@ public class Ouvrage implements Serializable {
 
 	public void setTitre(String titre) {
 		this.titre = titre;
-	}
-
-	public CategorieOuvrage getCategorieOuvrage() {
-		return this.categorieOuvrage;
-	}
-
-	public void setCategorieOuvrage(CategorieOuvrage categorieOuvrage) {
-		this.categorieOuvrage = categorieOuvrage;
 	}
 
 	public List<DemandeEmprunt> getDemandeEmprunts() {
@@ -115,5 +108,40 @@ public class Ouvrage implements Serializable {
 
 		return demandeEmprunt;
 	}
+
+	public String getCategorie() {
+		return categorie;
+	}
+
+	public void setCategorie(String categorieOuvrage) {
+		this.categorie = categorieOuvrage;
+	}
+
+	@Override
+	public String toString() {
+		return "Ouvrage [id=" + id + ", auteur=" + auteur + ", dateParution=" + dateParution + ", proprietaire="
+				+ proprietaire + ", titre=" + titre + ", categorie=" + categorie + ", demandeEmprunts="
+				+ demandeEmprunts + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Ouvrage other = (Ouvrage) obj;
+		return Objects.equals(id, other.id);
+	}
+	
+	
+	
 
 }

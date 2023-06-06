@@ -27,7 +27,7 @@ public class Personne implements Serializable {
 	private String			prenom;
 
 	@NotNull( message = "La catégorie est obligatoire")
-	private CategorieOuvrage		categorie;
+	private String		categorie;
 
 	private List<Telephone>	telephones = new ArrayList<>();
 
@@ -37,7 +37,7 @@ public class Personne implements Serializable {
 	public Personne() {
 	}
 
-	public Personne(Integer id, String nom, String prenom, CategorieOuvrage categorie) {
+	public Personne(Integer id, String nom, String prenom, String categorie) {
 		super();
 		this.id = id;
 		this.nom = nom;
@@ -72,11 +72,11 @@ public class Personne implements Serializable {
 		this.prenom = prenom;
 	}
 
-	public CategorieOuvrage getCategorie() {
+	public String getCategorie() {
 		return categorie;
 	}
 
-	public void setCategorie(CategorieOuvrage categorie) {
+	public void setCategorie(String categorie) {
 		this.categorie = categorie;
 	}
 

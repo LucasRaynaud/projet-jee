@@ -23,6 +23,10 @@
 			<to-view-id>/pages/user/demandeami/liste.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
+			<from-outcome>emprunts</from-outcome>
+			<to-view-id>/pages/user/emprunt/liste.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
 			<from-outcome>info</from-outcome>
 			<to-view-id>/pages/info.xhtml</to-view-id>
 		</navigation-case>

@@ -15,36 +15,33 @@ public class Ouvrage implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	private Integer idouvrage;
+	private Integer id;
 
 	private String auteur;
 	
-	private Integer dateparution;
+	private Integer dateParution;
 
 	private String titre;
 
-	//bi-directional one-to-one association to CategorieOuvrage
-	@OneToOne(mappedBy="ouvrage")
-	private CategorieOuvrage categorieOuvrage;
+	private String categorie;
 
 	//bi-directional many-to-one association to DemandeEmprunt
 	@OneToMany(mappedBy="ouvrage")
 	private List<DemandeEmprunt> demandeEmprunts;
 
-	//bi-directional many-to-one association to Compte
-	@ManyToOne
+	@OneToOne
 	@JoinColumn(name="idproprietaire")
-	private Compte compte;
+	private Compte proprietaire;
 
 	public Ouvrage() {
 	}
 
-	public Integer getIdouvrage() {
-		return this.idouvrage;
+	public Integer getId() {
+		return this.id;
 	}
 
-	public void setIdouvrage(Integer idouvrage) {
-		this.idouvrage = idouvrage;
+	public void setId(Integer idouvrage) {
+		this.id = idouvrage;
 	}
 
 	public String getAuteur() {
@@ -55,12 +52,12 @@ public class Ouvrage implements Serializable {
 		this.auteur = auteur;
 	}
 
-	public Integer getDateparution() {
-		return this.dateparution;
+	public Integer getDateParution() {
+		return this.dateParution;
 	}
 
-	public void setDateparution(Integer dateparution) {
-		this.dateparution = dateparution;
+	public void setDateParution(Integer dateparution) {
+		this.dateParution = dateparution;
 	}
 
 	public String getTitre() {
@@ -71,12 +68,12 @@ public class Ouvrage implements Serializable {
 		this.titre = titre;
 	}
 
-	public CategorieOuvrage getCategorieOuvrage() {
-		return this.categorieOuvrage;
+	public String getCategorie() {
+		return this.categorie;
 	}
 
-	public void setCategorieOuvrage(CategorieOuvrage categorieOuvrage) {
-		this.categorieOuvrage = categorieOuvrage;
+	public void setCategorie(String categorieOuvrage) {
+		this.categorie = categorieOuvrage;
 	}
 
 	public List<DemandeEmprunt> getDemandeEmprunts() {
@@ -101,12 +98,12 @@ public class Ouvrage implements Serializable {
 		return demandeEmprunt;
 	}
 
-	public Compte getCompte() {
-		return this.compte;
+	public Compte getProprietaire() {
+		return this.proprietaire;
 	}
 
-	public void setCompte(Compte compte) {
-		this.compte = compte;
+	public void setProprietaire(Compte compte) {
+		this.proprietaire = compte;
 	}
 
 }

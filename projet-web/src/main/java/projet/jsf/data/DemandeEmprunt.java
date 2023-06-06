@@ -15,9 +15,8 @@ public class DemandeEmprunt implements Serializable {
 	private Date dateemprunt;
 
 	@NotNull(message = "Un emprunt doit avoir un emprunteur")
-	private Integer idemprunteur;
+	private Compte emprunteur;
 
-	private Integer idproprietaire;
 
 	@NotBlank(message = "Le statut doit être défini")
 	@Size(max = 20, message = "Le statut ne doit pas dépasser 20 caractères")
@@ -30,13 +29,12 @@ public class DemandeEmprunt implements Serializable {
 		super();
 	}
 
-	public DemandeEmprunt(Integer id, Date dateemprunt, Integer idemprunteur, Integer idproprietaire, String statut,
+	public DemandeEmprunt(Integer id, Date dateemprunt, Compte emprunteur, String statut,
 			Ouvrage ouvrage) {
 		super();
 		this.id = id;
 		this.dateemprunt = dateemprunt;
-		this.idemprunteur = idemprunteur;
-		this.idproprietaire = idproprietaire;
+		this.emprunteur = emprunteur;
 		this.statut = statut;
 		this.ouvrage = ouvrage;
 	}
@@ -57,21 +55,14 @@ public class DemandeEmprunt implements Serializable {
 		this.dateemprunt = dateemprunt;
 	}
 
-	public Integer getIdemprunteur() {
-		return idemprunteur;
+	public Compte getEmprunteur() {
+		return emprunteur;
 	}
 
-	public void setIdemprunteur(Integer idemprunteur) {
-		this.idemprunteur = idemprunteur;
+	public void setEmprunteur(Compte emprunteur) {
+		this.emprunteur = emprunteur;
 	}
 
-	public Integer getIdproprietaire() {
-		return idproprietaire;
-	}
-
-	public void setIdproprietaire(Integer idproprietaire) {
-		this.idproprietaire = idproprietaire;
-	}
 
 	public String getStatut() {
 		return statut;
