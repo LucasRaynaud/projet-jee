@@ -4,31 +4,30 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Date;
 
-
 @Entity
-@Table(name="demande_amis")
-@NamedQuery(name="DemandeAmi.findAll", query="SELECT d FROM DemandeAmi d")
+@Table(name = "demande_amis")
+@NamedQuery(name = "DemandeAmi.findAll", query = "SELECT d FROM DemandeAmi d")
 public class DemandeAmi implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue( strategy = GenerationType.IDENTITY)
-	@Column( name = "iddemandeamis")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "iddemandeamis")
 	private Integer id;
 
 	@Temporal(TemporalType.DATE)
-	@Column( name = "datedemande")
+	@Column(name = "datedemande")
 	private Date datedemande;
-	
-	@JoinColumn( name = "idenvoyeur")
+
+	@JoinColumn(name = "idenvoyeur")
 	@OneToOne
 	private Compte envoyeur;
-	
-	@JoinColumn( name = "idreceveur")
+
+	@JoinColumn(name = "idreceveur")
 	@OneToOne
 	private Compte receveur;
-	
-	@Column( name = "statut")
+
+	@Column(name = "statut")
 	private String statut;
 
 	public DemandeAmi() {
@@ -72,6 +71,12 @@ public class DemandeAmi implements Serializable {
 
 	public void setStatut(String statut) {
 		this.statut = statut;
+	}
+
+	@Override
+	public String toString() {
+		return "DemandeAmi [id=" + id + ", datedemande=" + datedemande + ", envoyeur=" + envoyeur + ", receveur="
+				+ receveur + ", statut=" + statut + "]";
 	}
 
 }

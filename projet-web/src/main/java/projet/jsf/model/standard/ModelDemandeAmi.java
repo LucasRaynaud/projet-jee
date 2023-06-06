@@ -2,6 +2,7 @@ package projet.jsf.model.standard;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -22,7 +23,11 @@ import projet.jsf.util.UtilJsf;
 @ViewScoped
 public class ModelDemandeAmi implements Serializable {
 
-	private List<DemandeAmi> liste;
+	private List<DemandeAmi> listeDemandeEnvoye;
+
+	private List<DemandeAmi> listeDemandeRecu;
+
+	private List<DemandeAmi> listeAmis;
 
 	private DemandeAmi courant;
 
@@ -35,14 +40,34 @@ public class ModelDemandeAmi implements Serializable {
 	@Inject
 	private IMapper mapper;
 
-	public List<DemandeAmi> getListe() {
-		if (liste == null) {
-			liste = new ArrayList<>();
-			for (DtoDemandeAmi dtoDemandeAmi : serviceDemandeAmi.listerTout()) {
-				liste.add(mapper.map(dtoDemandeAmi));
+	public List<DemandeAmi> getListeDemandeEnvoye() {
+		if (listeDemandeEnvoye == null) {
+			listeDemandeEnvoye = new ArrayList<>();
+			for (DtoDemandeAmi dtoDemandeAmi : serviceDemandeAmi.listerDemandeEnvoye(mapper.map(compteActif))) {
+				listeDemandeEnvoye.add(mapper.map(dtoDemandeAmi));
 			}
 		}
-		return liste;
+		return listeDemandeEnvoye;
+	}
+
+	public List<DemandeAmi> getListeDemandeRecu() {
+		if (listeDemandeRecu == null) {
+			listeDemandeRecu = new ArrayList<>();
+			for (DtoDemandeAmi dtoDemandeAmi : serviceDemandeAmi.listerDemandeAmiRecu(mapper.map(compteActif))) {
+				listeDemandeRecu.add(mapper.map(dtoDemandeAmi));
+			}
+		}
+		return listeDemandeRecu;
+	}
+
+	public List<DemandeAmi> getListeAmis() {
+		if (listeAmis == null) {
+			listeAmis = new ArrayList<>();
+			for (DtoDemandeAmi dtoDemandeAmi : serviceDemandeAmi.listerAmis(mapper.map(compteActif))) {
+				listeAmis.add(mapper.map(dtoDemandeAmi));
+			}
+		}
+		return listeAmis;
 	}
 
 	public DemandeAmi getCourant() {
@@ -76,7 +101,7 @@ public class ModelDemandeAmi implements Serializable {
 			UtilJsf.messageInfo("Mise à jour effectuée avec succès.");
 			return "liste";
 		} catch (ExceptionValidation e) {
-			UtilJsf.messageError(e);
+			UtilJsf.messageError(e.getMessage());
 			return null;
 		}
 	}
@@ -84,11 +109,23 @@ public class ModelDemandeAmi implements Serializable {
 	public String supprimer(DemandeAmi item) {
 		try {
 			serviceDemandeAmi.supprimer(item.getId());
-			liste.remove(item);
+			listeDemandeEnvoye.remove(item);
 			UtilJsf.messageInfo("Suppression effectuée avec succès.");
 		} catch (ExceptionValidation e) {
 			UtilJsf.messageError(e);
 		}
 		return null;
+	}
+
+	public String valider(DemandeAmi item) {
+		try {
+			item.setStatut("ACCEPTEE");
+			item.setDateDemande(new Date());
+			serviceDemandeAmi.modifier(mapper.map(item));
+			return "liste";
+		} catch (ExceptionValidation e) {
+			UtilJsf.messageError(e);
+			return null;
+		}
 	}
 }

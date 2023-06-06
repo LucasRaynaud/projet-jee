@@ -2,6 +2,7 @@ package projet.commun.service;
 
 import java.util.List;
 
+import projet.commun.dto.DtoCompte;
 import projet.commun.dto.DtoDemandeAmi;
 import projet.commun.exception.ExceptionValidation;
 
@@ -17,5 +18,9 @@ public interface IServiceDemandeAmi {
 
 	List<DtoDemandeAmi>	listerTout() ;
 	
-	List<DtoDemandeAmi> listerDemandeAmiCompte(int idCompte);
+	List<DtoDemandeAmi> listerDemandeAmiRecu(DtoCompte idCompte);
+
+	List<DtoDemandeAmi> listerAmis(DtoCompte map);
+
+	List<DtoDemandeAmi> listerDemandeEnvoye(DtoCompte map);
 }

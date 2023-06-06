@@ -10,9 +10,56 @@
 	<ui:define name="contenu">
 
 		<h:form>
-
-			<h:dataTable styleClass="liste" value="#{modelDemandeAmi.liste}"
+			<h:dataTable styleClass="liste"
+				value="#{modelDemandeAmi.listeDemandeEnvoye}"
+				rendered="#{not empty modelDemandeAmi.listeDemandeEnvoye}"
 				var="item">
+				<f:facet name="header">
+					<h:outputText value="Demande d'amis envoyées" />
+				</f:facet>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Receveur" />
+					</f:facet>
+				#{item.receveur.pseudo}
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Statut" />
+					</f:facet>
+				#{item.statut}
+			</h:column>
+
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Date de la demande" />
+					</f:facet>
+				#{item.dateDemande}
+			</h:column>
+
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Actions" />
+					</f:facet>
+					<h:commandButton action="#{modelDemandeAmi.supprimer(item)}"
+						value="Annuler" image="#{ resource['images:supprimer.png'] }"
+						title="Annuler" styleClass="image-action">
+					</h:commandButton>
+				</h:column>
+
+			</h:dataTable>
+			<br />
+
+		</h:form>
+
+		<h:form>
+			<h:dataTable styleClass="liste"
+				value="#{modelDemandeAmi.listeDemandeRecu}"
+				rendered="#{not empty modelDemandeAmi.listeDemandeRecu}" var="item">
+				<f:facet name="header">
+					<h:outputText value="Demande d'amis reçues" />
+				</f:facet>
 				<h:column>
 					<f:facet name="header">
 						<h:outputText value="Envoyeur" />
@@ -38,17 +85,63 @@
 					<f:facet name="header">
 						<h:outputText value="Actions" />
 					</f:facet>
+					<h:commandButton action="#{modelDemandeAmi.valider(item)}"
+						value="Valider" image="#{ resource['images:valider.png'] }"
+						title="Valider" styleClass="image-action">
+					</h:commandButton>
+
 					<h:commandButton action="#{modelDemandeAmi.supprimer(item)}"
-						value="Refuser" image="#{ resource['images:supprimer.png'] }"
+						value="Refuser" image="#{ resource['images:refuser.png'] }"
 						title="Refuser" styleClass="image-action">
 					</h:commandButton>
 				</h:column>
 
 			</h:dataTable>
-			<br/>
-			<h:button value="Nouvelle demande" outcome="formulaire" />
+			<br />
 
 		</h:form>
+
+
+		<h:form>
+			<h:dataTable styleClass="liste" value="#{modelDemandeAmi.listeAmis}"
+				rendered="#{not empty modelDemandeAmi.listeAmis}" var="item">
+				<f:facet name="header">
+					<h:outputText value="Mes Amis" />
+				</f:facet>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Amis" />
+					</f:facet>
+					<h:outputText value="#{item.envoyeur.pseudo}"
+						rendered="#{item.envoyeur.pseudo ne compteActif.pseudo}" />
+					<h:outputText value="#{item.receveur.pseudo}"
+						rendered="#{item.receveur.pseudo ne compteActif.pseudo}" />
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Ami depuis" />
+					</f:facet>
+				#{item.dateDemande}
+			</h:column>
+
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Actions" />
+					</f:facet>
+
+					<h:commandButton action="#{modelDemandeAmi.supprimer(item)}"
+						value="Supprimer" image="#{ resource['images:supprimer.png'] }"
+						title="Supprimer" styleClass="image-action">
+					</h:commandButton>
+				</h:column>
+
+			</h:dataTable>
+			<br />
+
+		</h:form>
+
+		<h:button value="Nouvelle demande" outcome="formulaire" />
 
 	</ui:define>
 

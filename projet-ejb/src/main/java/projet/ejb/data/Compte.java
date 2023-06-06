@@ -15,36 +15,33 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 
-
 @Entity
-@Table( name = "compte" )
-public class Compte  {
+@Table(name = "compte")
+public class Compte {
 
-	
 	// Champs
 
 	@Id
-	@GeneratedValue( strategy = IDENTITY)
-	@Column( name = "idcompte")
-	private int			id;
-	
-	@Column( name = "pseudo")
-	private String		pseudo;
-	
-	@Column( name = "motdepasse")
-	private String		motDePasse;
-	
-	@Column( name = "email")
-	private String		email;
-	
-	@ElementCollection( fetch = EAGER )
-	@CollectionTable( name = "role", joinColumns = @JoinColumn( name = "idcompte" ) )
-	@Column( name = "role")
-	private List<String> roles = new ArrayList<>();	
-	
-	
+	@GeneratedValue(strategy = IDENTITY)
+	@Column(name = "idcompte")
+	private int id;
+
+	@Column(name = "pseudo")
+	private String pseudo;
+
+	@Column(name = "motdepasse")
+	private String motDePasse;
+
+	@Column(name = "email")
+	private String email;
+
+	@ElementCollection(fetch = EAGER)
+	@CollectionTable(name = "role", joinColumns = @JoinColumn(name = "idcompte"))
+	@Column(name = "role")
+	private List<String> roles = new ArrayList<>();
+
 	// Constructeurs
-	
+
 	public Compte() {
 	}
 
@@ -54,14 +51,13 @@ public class Compte  {
 		this.motDePasse = motDePasse;
 		this.email = email;
 	}
-	
-		
+
 	// Getters & setters
-	
+
 	public int getId() {
 		return id;
 	}
-	
+
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -81,11 +77,11 @@ public class Compte  {
 	public void setMotDePasse(String motDePasse) {
 		this.motDePasse = motDePasse;
 	}
-	
+
 	public String getEmail() {
 		return email;
 	}
-	
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
@@ -98,7 +94,6 @@ public class Compte  {
 		this.roles = roles;
 	}
 
-    
 	// equals() et hashcode()
 
 	@Override
@@ -122,5 +117,11 @@ public class Compte  {
 			return false;
 		return true;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Compte [id=" + id + ", pseudo=" + pseudo + ", motDePasse=" + motDePasse + ", email=" + email
+				+ ", roles=" + roles + "]";
+	}
+
 }

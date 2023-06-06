@@ -2,6 +2,7 @@ package projet.ejb.dao;
 
 import java.util.List;
 
+import projet.commun.dto.DtoCompte;
 import projet.ejb.data.Compte;
 
 
@@ -20,5 +21,7 @@ public interface IDaoCompte {
 	Compte 		validerAuthentification( String pseudo, String motDePasse );
 
 	boolean 	verifierUnicitePseudo( String pseudo, int idCompte );
+
+	List<Compte> listerTout(DtoCompte courant);
 
 }

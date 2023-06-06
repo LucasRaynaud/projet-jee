@@ -62,6 +62,16 @@ public class ServiceCompte implements IServiceCompte {
 		}
 		return liste;
 	}
+	
+	@Override
+	public List<DtoCompte> listerTout(DtoCompte courant) {
+		List<DtoCompte> liste = new ArrayList<>();
+		for (Compte compte : daoCompte.listerTout(courant)) {
+			liste.add(mapper.map(compte));
+		}
+		return liste;
+	}
+
 
 	// Méthodes auxiliaires
 
@@ -95,5 +105,4 @@ public class ServiceCompte implements IServiceCompte {
 			throw new ExceptionValidation(message.toString().substring(1));
 		}
 	}
-
 }

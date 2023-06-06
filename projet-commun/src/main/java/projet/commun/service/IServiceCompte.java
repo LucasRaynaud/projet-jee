@@ -18,4 +18,6 @@ public interface IServiceCompte {
 
 	List<DtoCompte>	listerTout() ;
 
+	List<DtoCompte> listerTout(DtoCompte courant);
+
 }

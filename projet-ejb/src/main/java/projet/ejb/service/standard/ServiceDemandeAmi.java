@@ -1,7 +1,5 @@
 package projet.ejb.service.standard;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -10,6 +8,7 @@ import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
+import projet.commun.dto.DtoCompte;
 import projet.commun.dto.DtoDemandeAmi;
 import projet.commun.exception.ExceptionValidation;
 import projet.commun.service.IServiceDemandeAmi;
@@ -35,6 +34,7 @@ public class ServiceDemandeAmi implements IServiceDemandeAmi{
 	public int inserer(DtoDemandeAmi dtoDemandeAmi) throws ExceptionValidation {
 		dtoDemandeAmi.setStatut("EN ATTENTE");
 		dtoDemandeAmi.setDateDemande(new Date());
+		verifierUniciteDemandeAmis(dtoDemandeAmi);
 		return daoDemandeAmi.inserer(mapper.map(dtoDemandeAmi));
 	}
 
@@ -67,12 +67,45 @@ public class ServiceDemandeAmi implements IServiceDemandeAmi{
 	// Méthodes auxiliaires
 	
 	@Override
-	public List<DtoDemandeAmi> listerDemandeAmiCompte(int idCompte) {
+	public List<DtoDemandeAmi> listerDemandeAmiRecu(DtoCompte DtoCompte) {
 		List<DtoDemandeAmi> liste = new ArrayList<>();
-		for (DemandeAmi compte : daoDemandeAmi.listerDemandeAmiCompte(idCompte)) {
+		for (DemandeAmi compte : daoDemandeAmi.listerDemandeAmiRecu(mapper.map(DtoCompte))) {
 			liste.add(mapper.map(compte));
 		}
 		return liste;
+	}
+	
+	@Override
+	public List<DtoDemandeAmi> listerDemandeEnvoye(DtoCompte DtoCompte) {
+		List<DtoDemandeAmi> liste = new ArrayList<>();
+		for (DemandeAmi compte : daoDemandeAmi.listerDemandeAmiEnvoye(mapper.map(DtoCompte))) {
+			liste.add(mapper.map(compte));
+		}
+		return liste;
+	}
+	
+	@Override
+	public List<DtoDemandeAmi> listerAmis(DtoCompte dtoCompte) {
+		List<DtoDemandeAmi> liste = new ArrayList<>();
+		for (DemandeAmi compte : daoDemandeAmi.listerAmis(mapper.map(dtoCompte))) {
+			liste.add(mapper.map(compte));
+		}
+		return liste;
+	}
+	
+	//TODO
+	// Fix erreur quand throws exception
+	private void verifierUniciteDemandeAmis(DtoDemandeAmi dtoDemandeAmi) throws ExceptionValidation {
+
+		StringBuilder message = new StringBuilder();
+
+		if (!daoDemandeAmi.verifierUniciteDemandeAmis(mapper.map(dtoDemandeAmi))) {
+			message.append("\nUne demande d'amis existe déja");
+		}
+			
+		if (message.length() > 0) {
+			throw new ExceptionValidation(message.toString().substring(1));
+		}
 	}
 
 }

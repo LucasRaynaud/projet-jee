@@ -28,12 +28,11 @@
 					<td><h:selectOneMenu id="receveur" layout="pageDirection"
 							value="#{modelDemandeAmi.courant.receveur}"
 							converter="#{converterCompte}">
-							<f:selectItems value="#{modelCompte.liste}" var="receveur"
-								itemLabel="#{receveur.pseudo}" itemValue="#{receveur}" />
+							<f:selectItems value="#{modelCompte.listeSaufCourant}"
+								var="receveur" itemLabel="#{receveur.pseudo}"
+								itemValue="#{receveur}" />
 						</h:selectOneMenu> <h:message for="receveurs" errorClass="error" /></td>
 				</tr>
-				<h:inputText id="idenvoyeur" value="#{compteActif.id}"
-							readonly="true" />
 			</table>
 			<br />
 			<h:commandButton value="Valider"

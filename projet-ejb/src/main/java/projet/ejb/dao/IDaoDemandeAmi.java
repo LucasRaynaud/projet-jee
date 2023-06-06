@@ -2,6 +2,7 @@ package projet.ejb.dao;
 
 import java.util.List;
 
+import projet.ejb.data.Compte;
 import projet.ejb.data.DemandeAmi;
 
 public interface IDaoDemandeAmi {
@@ -15,5 +16,11 @@ public interface IDaoDemandeAmi {
 
 	List<DemandeAmi> listerTout();
 
-	List<DemandeAmi> listerDemandeAmiCompte(int idCompte);
+	List<DemandeAmi> listerDemandeAmiRecu(Compte idCompte);
+
+	boolean verifierUniciteDemandeAmis(DemandeAmi demandeAmi);
+
+	List<DemandeAmi> listerAmis(Compte map);
+	
+	List<DemandeAmi> listerDemandeAmiEnvoye(Compte idCompte);
 }
