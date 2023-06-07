@@ -59,7 +59,7 @@ public class DaoDemandeEmprunt implements IDaoDemandeEmprunt {
 		em.clear();
 		var jpql = "SELECT o FROM DemandeEmprunt d "
 				+ "JOIN Ouvrage o ON d.proprietaire=o.proprietaire "
-				+ "WHERE o.proprietaire=:compteActif AND o.id=:ouvrage";
+				+ "WHERE o.proprietaire=:compteActif AND o.id=:ouvrage AND statut='ACCEPTEE'";
 		var query = em.createQuery(jpql,DtoDemandeEmprunt.class);
 		query.setParameter("compteActif", compteActif);
 		query.setParameter("ouvrage", ouvrage);
