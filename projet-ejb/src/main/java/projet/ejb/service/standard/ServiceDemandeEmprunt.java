@@ -14,33 +14,26 @@ import projet.commun.dto.DtoOuvrage;
 import projet.commun.exception.ExceptionValidation;
 import projet.commun.service.IServiceDemandeEmprunt;
 import projet.ejb.dao.IDaoDemandeEmprunt;
-<<<<<<< HEAD
-import projet.ejb.data.Compte;
-import projet.ejb.data.DemandeAmi;
-=======
->>>>>>> refs/heads/Lucas-dev
 import projet.ejb.data.DemandeEmprunt;
 import projet.ejb.data.mapper.IMapperEjb;
 
 @Stateless
 @Remote
-public class ServiceDemandeEmprunt implements IServiceDemandeEmprunt{
-	
+public class ServiceDemandeEmprunt implements IServiceDemandeEmprunt {
+
 	// Champs
 	@Inject
 	private IMapperEjb mapper;
 	@Inject
 	private IDaoDemandeEmprunt daoDemandeEmprunt;
-	
 
 	// Actions
 
-	
 	@Override
 	public int inserer(DtoDemandeEmprunt dtoDemandeEmprunt) throws ExceptionValidation {
 		dtoDemandeEmprunt.setStatut("EN ATTENTE");
 		dtoDemandeEmprunt.setDateemprunt(new Date());
-		
+
 		int id = daoDemandeEmprunt.inserer(mapper.map(dtoDemandeEmprunt));
 		return id;
 	}
@@ -48,14 +41,14 @@ public class ServiceDemandeEmprunt implements IServiceDemandeEmprunt{
 	@Override
 	public void modifier(DtoDemandeEmprunt dtoDemandeEmprunt) throws ExceptionValidation {
 		daoDemandeEmprunt.modifier(mapper.map(dtoDemandeEmprunt));
-		
+
 	}
 
 	@Override
 	public void supprimer(int idDemandeEmprunt) throws ExceptionValidation {
 		daoDemandeEmprunt.supprimer(idDemandeEmprunt);
 	}
-	
+
 	@Override
 	public DtoDemandeEmprunt retrouver(int idDemandeAmi) {
 		return mapper.map(daoDemandeEmprunt.retrouver(idDemandeAmi));
@@ -63,7 +56,7 @@ public class ServiceDemandeEmprunt implements IServiceDemandeEmprunt{
 
 	@Override
 	public List<DtoDemandeEmprunt> listerTout() {
-		
+
 		List<DtoDemandeEmprunt> liste = new ArrayList<>();
 		for (DemandeEmprunt compte : daoDemandeEmprunt.listerTout()) {
 			liste.add(mapper.map(compte));
@@ -73,49 +66,49 @@ public class ServiceDemandeEmprunt implements IServiceDemandeEmprunt{
 
 	@Override
 	public DtoDemandeEmprunt getEmpruntFromOuvrage(DtoOuvrage ouvrage, DtoCompte compteActif) {
-		return daoDemandeEmprunt.getEmpruntFromOuvrage(mapper.map(ouvrage),mapper.map(compteActif));
+		return daoDemandeEmprunt.getEmpruntFromOuvrage(mapper.map(ouvrage), mapper.map(compteActif));
 	}
-	
+
 	// Méthodes auxiliaires
-	
-		@Override
-		public List<DtoDemandeEmprunt> listerDemandeEmpruntRecu(DtoCompte DtoCompte) {
-			List<DtoDemandeEmprunt> liste = new ArrayList<>();
-			for (DemandeEmprunt compte : daoDemandeEmprunt.listerDemandeEmpruntRecu(mapper.map(DtoCompte))) {
-				liste.add(mapper.map(compte));
-			}
-			return liste;
-		}
-		
-		@Override
-		public List<DtoDemandeEmprunt> listerDemandeEnvoye(DtoCompte DtoCompte) {
-			List<DtoDemandeEmprunt> liste = new ArrayList<>();
-			for (DemandeEmprunt compte : daoDemandeEmprunt.listerDemandeEnvoye(mapper.map(DtoCompte))) {
-				liste.add(mapper.map(compte));
-			}
-			return liste;
-		}
-		
-		@Override
-		public List<DtoDemandeEmprunt> listerEmpruntes(DtoCompte dtoCompte) {
-			List<DtoDemandeEmprunt> liste = new ArrayList<>();
-			for (DemandeEmprunt compte : daoDemandeEmprunt.listerEmpruntes(mapper.map(dtoCompte))) {
-				liste.add(mapper.map(compte));
-			}
-			return liste;
-		}
-		
-		private void verifierUniciteDemandeEmprunt(DtoDemandeEmprunt dtoDemandeEmprunt) throws ExceptionValidation {
 
-			StringBuilder message = new StringBuilder();
-
-			if (!daoDemandeEmprunt.verifierUniciteDemandeEmprunt(mapper.map(dtoDemandeEmprunt))) {
-				message.append("\nUne demande d'emprunt existe déja");
-			}
-				
-			if (message.length() > 0) {
-				throw new ExceptionValidation(message.toString().substring(1));
-			}
+	@Override
+	public List<DtoDemandeEmprunt> listerDemandeEmpruntRecu(DtoCompte DtoCompte) {
+		List<DtoDemandeEmprunt> liste = new ArrayList<>();
+		for (DemandeEmprunt compte : daoDemandeEmprunt.listerDemandeEmpruntRecu(mapper.map(DtoCompte))) {
+			liste.add(mapper.map(compte));
 		}
+		return liste;
+	}
+
+	@Override
+	public List<DtoDemandeEmprunt> listerDemandeEnvoye(DtoCompte DtoCompte) {
+		List<DtoDemandeEmprunt> liste = new ArrayList<>();
+		for (DemandeEmprunt compte : daoDemandeEmprunt.listerDemandeEnvoye(mapper.map(DtoCompte))) {
+			liste.add(mapper.map(compte));
+		}
+		return liste;
+	}
+
+	@Override
+	public List<DtoDemandeEmprunt> listerEmpruntes(DtoCompte dtoCompte) {
+		List<DtoDemandeEmprunt> liste = new ArrayList<>();
+		for (DemandeEmprunt compte : daoDemandeEmprunt.listerEmpruntes(mapper.map(dtoCompte))) {
+			liste.add(mapper.map(compte));
+		}
+		return liste;
+	}
+
+	private void verifierUniciteDemandeEmprunt(DtoDemandeEmprunt dtoDemandeEmprunt) throws ExceptionValidation {
+
+		StringBuilder message = new StringBuilder();
+
+		if (!daoDemandeEmprunt.verifierUniciteDemandeEmprunt(mapper.map(dtoDemandeEmprunt))) {
+			message.append("\nUne demande d'emprunt existe déja");
+		}
+
+		if (message.length() > 0) {
+			throw new ExceptionValidation(message.toString().substring(1));
+		}
+	}
 
 }

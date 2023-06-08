@@ -12,9 +12,7 @@ import javax.inject.Named;
 
 import projet.commun.dto.DtoDemandeEmprunt;
 import projet.commun.exception.ExceptionValidation;
-import projet.commun.service.IServiceDemandeEmprunt;<<<<<<<HEAD
-import projet.commun.service.IServiceOuvrage;
-import projet.jsf.data.DemandeAmi;=======>>>>>>>refs/heads/Lucas-dev
+import projet.commun.service.IServiceDemandeEmprunt;
 import projet.jsf.data.DemandeEmprunt;
 import projet.jsf.data.Ouvrage;
 import projet.jsf.data.mapper.IMapper;

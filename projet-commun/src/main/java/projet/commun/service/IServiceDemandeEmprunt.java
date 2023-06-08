@@ -3,10 +3,6 @@ package projet.commun.service;
 import java.util.List;
 
 import projet.commun.dto.DtoCompte;
-<<<<<<< HEAD
-import projet.commun.dto.DtoDemandeAmi;
-=======
->>>>>>> refs/heads/Lucas-dev
 import projet.commun.dto.DtoDemandeEmprunt;
 import projet.commun.dto.DtoOuvrage;
 import projet.commun.exception.ExceptionValidation;
