@@ -12,6 +12,7 @@ import javax.persistence.PersistenceContext;
 
 import projet.commun.dto.DtoCompte;
 import projet.ejb.dao.IDaoOuvrage;
+import projet.ejb.data.Compte;
 import projet.ejb.data.Ouvrage;
 
 @Stateless
@@ -51,13 +52,31 @@ public class DaoOuvrage implements IDaoOuvrage{
 		var query = em.createQuery(jpql,Ouvrage.class);
 		return query.getResultList();
 	}
+	
+	@Override
+	public List<Ouvrage> listerTout(Compte map) {
+		em.clear();
+		var jpql = "SELECT o FROM Ouvrage o WHERE o.proprietaire<>:map ORDER BY o.titre";
+		var query = em.createQuery(jpql,Ouvrage.class);
+		query.setParameter("map", map);
+		return query.getResultList();
+	}
+	
+	@Override
+	public List<Ouvrage> listerToutUser(Compte map) {
+		em.clear();
+		var jpql = "SELECT o FROM Ouvrage o WHERE o.proprietaire=:map ORDER BY o.titre";
+		var query = em.createQuery(jpql,Ouvrage.class);
+		query.setParameter("map", map);
+		return query.getResultList();
+	}
 
 	@Override
-	public List<Ouvrage> listerOuvragesEmpruntes(DtoCompte map) {
+	public List<Ouvrage> listerOuvragesEmpruntes(Compte map) {
 		em.clear();
-		var jpql = "SELECT e FROM DemandeEmprunt WHERE emprunteur=:emprunteur";
+		var jpql = "SELECT e.ouvrage FROM DemandeEmprunt e WHERE e.emprunteur=:map";
 		var query = em.createQuery(jpql,Ouvrage.class);
-		query.setParameter("emprunteur", map);
+		query.setParameter("map", map);
 		return query.getResultList();
 	}
 

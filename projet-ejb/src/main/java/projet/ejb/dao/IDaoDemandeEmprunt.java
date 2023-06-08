@@ -26,5 +26,7 @@ public interface IDaoDemandeEmprunt {
 	
 	List<DemandeEmprunt> listerDemandeEnvoye(Compte idCompte);
 
-	DtoDemandeEmprunt getEmpruntFromOuvrage(Ouvrage ouvrage, Compte compteActif);
+	DemandeEmprunt getEmpruntFromOuvrage(Ouvrage ouvrage, Compte compteActif);
+
+	List<DemandeEmprunt> listerDemandeAccepte(Compte map);
 }

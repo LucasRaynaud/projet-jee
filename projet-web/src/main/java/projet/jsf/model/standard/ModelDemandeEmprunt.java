@@ -27,6 +27,7 @@ public class ModelDemandeEmprunt implements Serializable {
 	private List<DemandeEmprunt> liste;
 	private List<DemandeEmprunt> listeEnAttente;
 	private List<DemandeEmprunt> listeRecu;
+	private List<DemandeEmprunt> listeAccepte;
 
 	private DemandeEmprunt courant;
 
@@ -70,6 +71,17 @@ public class ModelDemandeEmprunt implements Serializable {
 		}
 		return listeRecu;
 	}
+	
+	public List<DemandeEmprunt> getListeAccepte() {
+		if (listeAccepte == null) {
+			listeAccepte = new ArrayList<>();
+			for (DtoDemandeEmprunt dtoDemandeEmprunt : serviceDemandeEmprunt
+					.listerDemandeAccepte(mapper.map(compteActif))) {
+				listeAccepte.add(mapper.map(dtoDemandeEmprunt));
+			}
+		}
+		return listeAccepte;
+	}
 
 	public DemandeEmprunt getCourant() {
 		if (courant == null) {
@@ -110,7 +122,7 @@ public class ModelDemandeEmprunt implements Serializable {
 	public String supprimer(DemandeEmprunt item) {
 		try {
 			serviceDemandeEmprunt.supprimer(item.getId());
-			listeEnAttente.remove(item);
+			listeAccepte.remove(item);
 			UtilJsf.messageInfo("Suppression effectuée avec succès.");
 		} catch (ExceptionValidation e) {
 			UtilJsf.messageError(e);

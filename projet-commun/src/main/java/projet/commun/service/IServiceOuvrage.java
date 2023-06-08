@@ -19,5 +19,9 @@ public interface IServiceOuvrage {
 	List<DtoOuvrage>	listerTout();
 
 	List<DtoOuvrage> listerOuvragesEmpruntes(DtoCompte map);
+
+	List<DtoOuvrage> listerTout(DtoCompte compteActif);
+
+	List<DtoOuvrage> listerToutUser(DtoCompte compteActif);
 	
 }

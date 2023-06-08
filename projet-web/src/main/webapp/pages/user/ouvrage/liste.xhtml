@@ -67,8 +67,10 @@
 
 		</h:form>
 		
-		<h:dataTable styleClass="liste" value="#{modelOuvrage.listeOuvrageEmpruntes}"
-				var="item" rendered="#{not empty modelOuvrage.listeOuvrageEmpruntes}">
+		<h:form>
+		
+		<h:dataTable styleClass="liste" value="#{modelDemandeEmprunt.listeAccepte}"
+				var="item" rendered="#{not empty modelDemandeEmprunt.listeAccepte}">
 				<f:facet name="header">
 						<h:outputText value="Liste des livres empruntés" />
 					</f:facet>
@@ -76,30 +78,30 @@
 					<f:facet name="header">
 						<h:outputText value="Titre" />
 					</f:facet>
-				#{item.titre}
+				#{item.ouvrage.titre}
 			</h:column>
 
 				<h:column>
 					<f:facet name="header">
 						<h:outputText value="Auteur" />
 					</f:facet>
-				#{item.auteur}
+				#{item.ouvrage.auteur}
 			</h:column>
 
 				<h:column>
 					<f:facet name="header">
 						<h:outputText value="Date de parution" />
 					</f:facet>
-				#{item.dateParution}
+				#{item.ouvrage.dateParution}
 			</h:column>
 
 				<h:column>
 					<f:facet name="header">
 						<h:outputText value="Catégorie" />
 					</f:facet>
-					<ui:repeat value="#{item.categorie}" var="categorie"
+					<ui:repeat value="#{item.ouvrage.categorie}" var="categorie"
 						varStatus="status">
-					#{utilAppli.getLibelleCategorie()}#{not status.last ? ', ' : ''}
+					#{utilAppli.getLibelleCategorie(categorie)}#{not status.last ? ', ' : ''}
 				</ui:repeat>
 				</h:column>
 
@@ -107,7 +109,7 @@
 					<f:facet name="header">
 						<h:outputText value="Actions" />
 					</f:facet>
-					<h:commandButton action="#{modelDemandeEmprunt.supprimerEmprunt(item)}"
+					<h:commandButton action="#{modelDemandeEmprunt.supprimerEmprunt(item.ouvrage)}"
 						value="Supprimer"
 						onclick="return confirm('Confirmez-vous la suppression ?')"
 						image="#{ resource['images:supprimer.png'] }" title="Supprimer"
@@ -119,7 +121,6 @@
 			</h:dataTable>
 
 			<br />
-			<h:button value="Ajouter" outcome="formulaire" />
 
 		</h:form>
 

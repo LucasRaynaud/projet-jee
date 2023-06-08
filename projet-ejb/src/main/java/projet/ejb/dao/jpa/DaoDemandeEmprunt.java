@@ -87,15 +87,25 @@ public class DaoDemandeEmprunt implements IDaoDemandeEmprunt {
 		query.setParameter("idCompte", idCompte);
 		return query.getResultList();
 	}
-
-	public DtoDemandeEmprunt getEmpruntFromOuvrage(Ouvrage ouvrage, Compte compteActif) {
+	
+	@Override
+	public List<DemandeEmprunt> listerDemandeAccepte(Compte idCompte) {
 		em.clear();
-		var jpql = "SELECT o FROM DemandeEmprunt d " + "JOIN Ouvrage o ON d.proprietaire=o.proprietaire "
-				+ "WHERE o.proprietaire=:compteActif AND o.id=:ouvrage AND statut='ACCEPTEE'";
-		var query = em.createQuery(jpql, DtoDemandeEmprunt.class);
+		var jpql = "SELECT d FROM DemandeEmprunt d WHERE emprunteur=:idCompte AND statut='ACCEPTEE'";
+		var query = em.createQuery(jpql, DemandeEmprunt.class);
+		query.setParameter("idCompte", idCompte);
+		return query.getResultList();
+	}
+
+	public DemandeEmprunt getEmpruntFromOuvrage(Ouvrage ouvrage, Compte compteActif) {
+		em.clear();
+		var jpql = "SELECT d FROM DemandeEmprunt d "
+				+ "WHERE d.emprunteur=:compteActif AND d.ouvrage=:ouvrage AND statut='ACCEPTEE'";
+		var query = em.createQuery(jpql, DemandeEmprunt.class);
 		query.setParameter("compteActif", compteActif);
 		query.setParameter("ouvrage", ouvrage);
-		return query.getSingleResult();
+		if (query.getResultList().size() > 0) return query.getResultList().get(0);
+		return null;
 	}
 
 }

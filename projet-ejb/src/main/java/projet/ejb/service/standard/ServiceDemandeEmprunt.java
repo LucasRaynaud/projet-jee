@@ -66,7 +66,7 @@ public class ServiceDemandeEmprunt implements IServiceDemandeEmprunt {
 
 	@Override
 	public DtoDemandeEmprunt getEmpruntFromOuvrage(DtoOuvrage ouvrage, DtoCompte compteActif) {
-		return daoDemandeEmprunt.getEmpruntFromOuvrage(mapper.map(ouvrage), mapper.map(compteActif));
+		return mapper.map(daoDemandeEmprunt.getEmpruntFromOuvrage(mapper.map(ouvrage), mapper.map(compteActif)));
 	}
 
 	// Méthodes auxiliaires
@@ -93,6 +93,15 @@ public class ServiceDemandeEmprunt implements IServiceDemandeEmprunt {
 	public List<DtoDemandeEmprunt> listerEmpruntes(DtoCompte dtoCompte) {
 		List<DtoDemandeEmprunt> liste = new ArrayList<>();
 		for (DemandeEmprunt compte : daoDemandeEmprunt.listerEmpruntes(mapper.map(dtoCompte))) {
+			liste.add(mapper.map(compte));
+		}
+		return liste;
+	}
+	
+	@Override
+	public List<DtoDemandeEmprunt> listerDemandeAccepte(DtoCompte dtoCompte) {
+		List<DtoDemandeEmprunt> liste = new ArrayList<>();
+		for (DemandeEmprunt compte : daoDemandeEmprunt.listerDemandeAccepte(mapper.map(dtoCompte))) {
 			liste.add(mapper.map(compte));
 		}
 		return liste;

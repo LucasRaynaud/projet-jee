@@ -28,7 +28,7 @@
 					<td><h:selectOneMenu id="ouvrage" layout="pageDirection"
 							value="#{modelDemandeEmprunt.courant.ouvrage}"
 							converter="#{converterOuvrage}">
-							<f:selectItems value="#{modelOuvrage.liste}"
+							<f:selectItems value="#{modelOuvrage.listeSansCourant}"
 								var="ouvrage" itemLabel="#{ouvrage.titre}"
 								itemValue="#{ouvrage}" />
 						</h:selectOneMenu> <h:message for="ouvrage" errorClass="error" /></td>

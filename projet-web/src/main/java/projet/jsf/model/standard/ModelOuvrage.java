@@ -40,7 +40,17 @@ public class ModelOuvrage implements Serializable {
 	public List<Ouvrage> getListe() {
 		if (liste == null) {
 			liste = new ArrayList<>();
-			for (DtoOuvrage dtoOuvrage : serviceOuvrage.listerTout()) {
+			for (DtoOuvrage dtoOuvrage : serviceOuvrage.listerToutUser(mapper.map(compteActif))) {
+				liste.add(mapper.map(dtoOuvrage));
+			}
+		}
+		return liste;
+	}
+	
+	public List<Ouvrage> getListeSansCourant() {
+		if (liste == null) {
+			liste = new ArrayList<>();
+			for (DtoOuvrage dtoOuvrage : serviceOuvrage.listerTout(mapper.map(compteActif))) {
 				liste.add(mapper.map(dtoOuvrage));
 			}
 		}
@@ -51,7 +61,7 @@ public class ModelOuvrage implements Serializable {
 		if (listeOuvragesEmpruntes == null) {
 			listeOuvragesEmpruntes = new ArrayList<>();
 			for (DtoOuvrage dtoOuvrage : serviceOuvrage.listerOuvragesEmpruntes(mapper.map(compteActif))) {
-				liste.add(mapper.map(dtoOuvrage));
+				listeOuvragesEmpruntes.add(mapper.map(dtoOuvrage));
 			}
 		}
 		return listeOuvragesEmpruntes;
@@ -81,7 +91,6 @@ public class ModelOuvrage implements Serializable {
 		try {
 			if ( courant.getId() == null) {
 				courant.setProprietaire(compteActif);
-				System.out.println(compteActif);
 				serviceOuvrage.inserer( mapper.map(courant) );
 			} else {
 				serviceOuvrage.modifier( mapper.map(courant) );

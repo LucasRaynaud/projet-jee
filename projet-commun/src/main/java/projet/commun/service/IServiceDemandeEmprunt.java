@@ -26,4 +26,6 @@ public interface IServiceDemandeEmprunt {
 	List<DtoDemandeEmprunt> listerDemandeEnvoye(DtoCompte map);
 
 	DtoDemandeEmprunt getEmpruntFromOuvrage(DtoOuvrage ouvrage, DtoCompte compteActif);
+
+	List<DtoDemandeEmprunt> listerDemandeAccepte(DtoCompte map);
 }
