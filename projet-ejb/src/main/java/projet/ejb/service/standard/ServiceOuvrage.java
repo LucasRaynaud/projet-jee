@@ -9,6 +9,7 @@ import javax.inject.Inject;
 
 import projet.ejb.data.Ouvrage;
 import projet.ejb.data.mapper.IMapperEjb;
+import projet.commun.dto.DtoCompte;
 import projet.commun.dto.DtoOuvrage;
 import projet.commun.exception.ExceptionValidation;
 import projet.commun.service.IServiceOuvrage;
@@ -51,6 +52,15 @@ public class ServiceOuvrage implements IServiceOuvrage {
 	public List<DtoOuvrage> listerTout() {
 		List<DtoOuvrage> liste = new ArrayList<>();
 		for (Ouvrage ouvrage : daoOuvrage.listerTout()) {
+			liste.add(mapper.map(ouvrage));
+		}
+		return liste;
+	}
+	
+	@Override
+	public List<DtoOuvrage> listerOuvragesEmpruntes(DtoCompte map) {
+		List<DtoOuvrage> liste = new ArrayList<>();
+		for (Ouvrage ouvrage : daoOuvrage.listerOuvragesEmpruntes(map)) {
 			liste.add(mapper.map(ouvrage));
 		}
 		return liste;

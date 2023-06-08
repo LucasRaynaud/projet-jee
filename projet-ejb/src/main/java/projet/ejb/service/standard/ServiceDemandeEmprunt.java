@@ -9,16 +9,16 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 import projet.commun.dto.DtoCompte;
-import projet.commun.dto.DtoDemandeAmi;
 import projet.commun.dto.DtoDemandeEmprunt;
+import projet.commun.dto.DtoOuvrage;
 import projet.commun.exception.ExceptionValidation;
-import projet.commun.service.IServiceDemandeAmi;
 import projet.commun.service.IServiceDemandeEmprunt;
-import projet.ejb.dao.IDaoCompte;
-import projet.ejb.dao.IDaoDemandeAmi;
 import projet.ejb.dao.IDaoDemandeEmprunt;
+<<<<<<< HEAD
 import projet.ejb.data.Compte;
 import projet.ejb.data.DemandeAmi;
+=======
+>>>>>>> refs/heads/Lucas-dev
 import projet.ejb.data.DemandeEmprunt;
 import projet.ejb.data.mapper.IMapperEjb;
 
@@ -55,7 +55,7 @@ public class ServiceDemandeEmprunt implements IServiceDemandeEmprunt{
 	public void supprimer(int idDemandeEmprunt) throws ExceptionValidation {
 		daoDemandeEmprunt.supprimer(idDemandeEmprunt);
 	}
-
+	
 	@Override
 	public DtoDemandeEmprunt retrouver(int idDemandeAmi) {
 		return mapper.map(daoDemandeEmprunt.retrouver(idDemandeAmi));
@@ -71,6 +71,11 @@ public class ServiceDemandeEmprunt implements IServiceDemandeEmprunt{
 		return liste;
 	}
 
+	@Override
+	public DtoDemandeEmprunt getEmpruntFromOuvrage(DtoOuvrage ouvrage, DtoCompte compteActif) {
+		return daoDemandeEmprunt.getEmpruntFromOuvrage(mapper.map(ouvrage),mapper.map(compteActif));
+	}
+	
 	// Méthodes auxiliaires
 	
 		@Override
@@ -100,8 +105,6 @@ public class ServiceDemandeEmprunt implements IServiceDemandeEmprunt{
 			return liste;
 		}
 		
-		//TODO
-		// Fix erreur quand throws exception
 		private void verifierUniciteDemandeEmprunt(DtoDemandeEmprunt dtoDemandeEmprunt) throws ExceptionValidation {
 
 			StringBuilder message = new StringBuilder();

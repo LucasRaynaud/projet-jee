@@ -41,7 +41,7 @@ public class Ouvrage implements Serializable {
 	private String categorie;
 
 	// bi-directional many-to-one association to DemandeEmprunt
-	@OneToMany(mappedBy = "ouvrage")
+	@OneToMany(mappedBy = "ouvrage", cascade = CascadeType.REMOVE)
 	private List<DemandeEmprunt> demandeEmprunts;
 
 	public Ouvrage() {

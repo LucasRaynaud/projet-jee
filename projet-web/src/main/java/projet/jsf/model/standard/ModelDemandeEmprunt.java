@@ -11,11 +11,10 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import projet.commun.dto.DtoDemandeEmprunt;
-import projet.commun.dto.DtoOuvrage;
 import projet.commun.exception.ExceptionValidation;
-import projet.commun.service.IServiceDemandeEmprunt;
+import projet.commun.service.IServiceDemandeEmprunt;<<<<<<<HEAD
 import projet.commun.service.IServiceOuvrage;
-import projet.jsf.data.DemandeAmi;
+import projet.jsf.data.DemandeAmi;=======>>>>>>>refs/heads/Lucas-dev
 import projet.jsf.data.DemandeEmprunt;
 import projet.jsf.data.Ouvrage;
 import projet.jsf.data.mapper.IMapper;
@@ -32,7 +31,7 @@ public class ModelDemandeEmprunt implements Serializable {
 	private List<DemandeEmprunt> listeRecu;
 
 	private DemandeEmprunt courant;
-	
+
 	@Inject
 	private CompteActif compteActif;
 
@@ -51,21 +50,23 @@ public class ModelDemandeEmprunt implements Serializable {
 		}
 		return liste;
 	}
-	
+
 	public List<DemandeEmprunt> getListeEnAttente() {
 		if (listeEnAttente == null) {
 			listeEnAttente = new ArrayList<>();
-			for (DtoDemandeEmprunt dtoDemandeEmprunt : serviceDemandeEmprunt.listerDemandeEmpruntRecu(mapper.map(compteActif))) {
+			for (DtoDemandeEmprunt dtoDemandeEmprunt : serviceDemandeEmprunt
+					.listerDemandeEmpruntRecu(mapper.map(compteActif))) {
 				listeEnAttente.add(mapper.map(dtoDemandeEmprunt));
 			}
 		}
 		return listeEnAttente;
 	}
-	
+
 	public List<DemandeEmprunt> getListeDemandee() {
 		if (listeRecu == null) {
 			listeRecu = new ArrayList<>();
-			for (DtoDemandeEmprunt dtoDemandeEmprunt : serviceDemandeEmprunt.listerDemandeEnvoye(mapper.map(compteActif))) {
+			for (DtoDemandeEmprunt dtoDemandeEmprunt : serviceDemandeEmprunt
+					.listerDemandeEnvoye(mapper.map(compteActif))) {
 				listeRecu.add(mapper.map(dtoDemandeEmprunt));
 			}
 		}
@@ -91,34 +92,34 @@ public class ModelDemandeEmprunt implements Serializable {
 		}
 		return null;
 	}
-	
+
 	public String validerMiseAJour() {
 		try {
-			if ( courant.getId() == null) {
+			if (courant.getId() == null) {
 				courant.setEmprunteur(compteActif);
-				serviceDemandeEmprunt.inserer( mapper.map(courant) );
+				serviceDemandeEmprunt.inserer(mapper.map(courant));
 			} else {
-				serviceDemandeEmprunt.modifier( mapper.map(courant) );
+				serviceDemandeEmprunt.modifier(mapper.map(courant));
 			}
-			UtilJsf.messageInfo( "Mise à jour effectuée avec succès." );
+			UtilJsf.messageInfo("Mise à jour effectuée avec succès.");
 			return "liste";
 		} catch (ExceptionValidation e) {
 			UtilJsf.messageError(e);
 			return null;
 		}
 	}
-	
-	public String supprimer( DemandeEmprunt item ) {
+
+	public String supprimer(DemandeEmprunt item) {
 		try {
-			serviceDemandeEmprunt.supprimer( item.getId() );
+			serviceDemandeEmprunt.supprimer(item.getId());
 			listeEnAttente.remove(item);
-			UtilJsf.messageInfo( "Suppression effectuée avec succès." );
+			UtilJsf.messageInfo("Suppression effectuée avec succès.");
 		} catch (ExceptionValidation e) {
-			UtilJsf.messageError( e ); 
+			UtilJsf.messageError(e);
 		}
 		return null;
 	}
-	
+
 	public String valider(DemandeEmprunt item) {
 		try {
 			item.setStatut("ACCEPTEE");
@@ -129,5 +130,13 @@ public class ModelDemandeEmprunt implements Serializable {
 			UtilJsf.messageError(e);
 			return null;
 		}
+	}
+
+	public void supprimerEmprunt(Ouvrage ouvrage) {
+		supprimer(getEmpruntFromOuvrage(ouvrage));
+	}
+
+	public DemandeEmprunt getEmpruntFromOuvrage(Ouvrage ouvrage) {
+		return mapper.map(serviceDemandeEmprunt.getEmpruntFromOuvrage(mapper.map(ouvrage), mapper.map(compteActif)));
 	}
 }
